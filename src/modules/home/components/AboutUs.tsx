@@ -1,0 +1,88 @@
+import type { ReactElement } from 'react';
+import {
+    RiTruckLine,
+    RiMedal2Line,
+    RiStore2Line,
+    RiCustomerService2Line
+} from 'react-icons/ri';
+
+interface Benefit {
+    icon: React.ElementType;
+    title: string;
+    description: string;
+}
+
+const BENEFITS: Benefit[] = [
+    {
+        icon: RiTruckLine,
+        title: 'Envíos a todo el país',
+        description:
+        'Recibe tus productos sin gluten donde estés, con entregas rápidas y seguras.'
+    },
+    {
+        icon: RiMedal2Line,
+        title: 'Productos certificados',
+        description:
+        'Cada artículo cuenta con sellos que garantizan la ausencia total de gluten.'
+    },
+    {
+        icon: RiStore2Line,
+        title: 'Proveedores confiables',
+        description:
+        'Trabajamos exclusivamente con marcas auditadas y especialistas en alimentos libres de gluten.'
+    },
+    {
+        icon: RiCustomerService2Line,
+        title: 'Asesoría personalizada',
+        description:
+        'Nuestro equipo responde tus dudas sobre intolerancias y preparaciones sin gluten.'
+    }
+];
+
+export const AboutUs = (): ReactElement => (
+    <section className="w-full bg-white py-24 sm:py-28 lg:py-32">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-4 sm:px-6 lg:grid-cols-[1.35fr_2fr] lg:gap-24">
+        {/* ─────────── Lado izquierdo ─────────── */}
+        <div className="flex flex-col">
+            {/* --------   Título en una sola línea   -------- */}
+            <h2 className="mb-6 whitespace-nowrap font-cap-hero text-4xl leading-tight text-black sm:text-5xl lg:text-6xl">
+            ¿Quiénes somos?
+            </h2>
+
+            <p className="mb-8 max-w-lg font-cap-text text-base leading-relaxed text-black">
+            Somos la primera tienda boliviana especializada en productos{' '}
+            <strong>100 % libres de gluten</strong>. Nuestra misión es darte la
+            tranquilidad de alimentarte sin riesgos, con la mejor variedad y el
+            respaldo de proveedores certificados.
+            </p>
+
+            <button
+            onClick={() => (window.location.href = '/')}
+            className="w-fit rounded-md bg-highlight px-8 py-3 text-base font-cap-link text-black transition hover:bg-[#83dca3]"
+            >
+            ¡Visita la tienda!
+            </button>
+        </div>
+
+        {/* ─────────── Beneficios ─────────── */}
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
+            {BENEFITS.map(({ icon: Icon, title, description }) => (
+            <div key={title} className="flex flex-col gap-4">
+                <div className="flex items-center gap-5">
+                <div className="flex h-22 w-22 items-center justify-center rounded-full bg-highlight/40 text-header">
+                    <Icon size={48} />
+                </div>
+                <h3 className="font-cap-medium text-xl text-black">{title}</h3>
+                </div>
+
+                <p className="font-cap-text text-sm leading-relaxed text-black sm:text-base">
+                {description}
+                </p>
+            </div>
+            ))}
+        </div>
+        </div>
+    </section>
+);
+
+export default AboutUs;
