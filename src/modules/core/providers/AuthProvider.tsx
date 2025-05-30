@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }: Props) => {
             setLoading(true);
             const { data } = await api.get<User>('/auth/me');
             setUser(data);
+            console.log('Usuario autenticado:', data);
         } catch {
             setUser(null);
         } finally {
