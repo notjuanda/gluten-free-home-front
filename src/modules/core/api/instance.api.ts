@@ -7,7 +7,6 @@ const apiInstance = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    // 👇🏽  Necesario para que el navegador envíe la cookie `authToken`
     withCredentials: true,
 });
 

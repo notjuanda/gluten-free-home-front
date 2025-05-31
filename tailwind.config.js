@@ -9,6 +9,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+
       colors: {
         header: '#2A3F32',
         button: {
@@ -67,7 +68,9 @@ module.exports = {
         'cap-link': 500,
         'cap-heading-1': 200,
         'cap-heading-2': 500,
-        'cap-text': 400
+        'cap-text': 400,
+        'cap-hero': 900, 
+        'cap-medium': 500, 
       },
       screens: {
         sm: '640px',
