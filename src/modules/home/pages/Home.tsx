@@ -9,7 +9,7 @@ const Home: React.FC = () => {
     return (
         <div className="w-full flex flex-col items-center">
             <HeroSection />
-            <FeatureStrip />
+            <FeatureStrip />    
             <AboutUs />
             <HeroDelivery />
             <FAQSection />
