@@ -1,4 +1,3 @@
-// src/components/Header.tsx
 import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import {
@@ -15,7 +14,6 @@ import { useAuth } from '../hooks/useAuth';
 const guestLinks = [
     { to: '/', label: 'Inicio' },
     { to: '/sobre-nosotros', label: 'Sobre Nosotros' },
-    { to: '/contacto', label: 'Contacto' },
     { to: '/faqs', label: 'Faqs' },
     { to: '/blog', label: 'Blog' },
     { to: '/explorar', label: 'Explorar' },
