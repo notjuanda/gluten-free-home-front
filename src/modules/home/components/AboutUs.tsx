@@ -40,7 +40,7 @@ const BENEFITS: Benefit[] = [
 ];
 
 export const AboutUs = (): ReactElement => (
-    <section className="w-full overflow-x-hidden bg-white py-24 sm:py-28 lg:py-32">
+    <section id="sobre-nosotros" className="w-full overflow-x-hidden bg-white py-24 sm:py-28 lg:py-32">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-4 sm:px-6 lg:grid-cols-[1.35fr_2fr] lg:gap-24">
         {/* ─────────── Lado izquierdo ─────────── */}
         <div className="flex flex-col">
