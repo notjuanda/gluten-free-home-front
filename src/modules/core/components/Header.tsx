@@ -17,7 +17,7 @@ import { useAuth } from '../hooks/useAuth';
 import { Link as ScrollLink } from 'react-scroll';
 
 const guestLinks = [
-    { to: '/#', label: 'Inicio' },
+    { to: '/', label: 'Inicio' },
     { to: '/#sobre-nosotros', label: 'Sobre Nosotros' },
     { to: '/#faqs', label: 'Faqs' },
     { to: '/blog', label: 'Blog' },
