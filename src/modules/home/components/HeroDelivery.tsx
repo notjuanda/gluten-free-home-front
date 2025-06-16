@@ -38,11 +38,10 @@ export const HeroDelivery = (): ReactElement => (
             className="
             absolute left-6 top-6 z-10 mb-12
             max-w-xs whitespace-pre-line font-cap-hero leading-tight text-white
-            text-3xl sm:max-w-md sm:text-4xl lg:text-5xl
+            text-2xl sm:max-w-md sm:text-3xl lg:text-4xl
             "
         >
             Con un click tienes tu producto
-            <br />
             en la puerta de tu casa!
         </h1>
 

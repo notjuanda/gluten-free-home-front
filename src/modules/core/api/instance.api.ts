@@ -10,7 +10,6 @@ const apiInstance = axios.create({
     withCredentials: true,
 });
 
-// ──────────────────────── Interceptores ────────────────────────
 apiInstance.interceptors.response.use(
     (response) => response,
     (error: AxiosError) => {
