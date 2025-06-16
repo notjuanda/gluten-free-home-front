@@ -4,7 +4,7 @@ export interface User {
     correo: string;
     nombreCompleto?: string;
     telefono?: string;
-    estadoCorreo: 'NO_VERIFICADO' | 'VERIFICADO';
+    estadoCorreo: 'NO_VERIFICADO' | 'verificado';
     roles: { id: number; nombre: string }[];
     createdAt: string;
     updatedAt: string;
