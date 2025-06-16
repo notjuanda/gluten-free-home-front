@@ -67,7 +67,10 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                     <ShoppingCart size={22} />
                 </button>
                 <button
-                    onClick={logout}
+                    onClick={() => {
+                        logout?.();
+                        navigate('/');
+                    }}
                     className={clsx(buttonBase, 'hover:underline')}
                 >
                     <LogOut size={18} /> Cerrar sesión
