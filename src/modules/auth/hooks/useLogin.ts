@@ -25,10 +25,18 @@ export const useLogin = () => {
         qc.invalidateQueries({ queryKey: ['me'] });
         toast.success('¡Bienvenido de nuevo!');
 
-        const route =
-            user.roles
-            ?.map(r => r.nombre.trim().toLowerCase())
-            .find(rol => ROLE_ROUTE[rol]);
+        interface UserRole {
+            nombre: string;
+        }
+
+        interface User {
+            roles?: UserRole[];
+        }
+
+        const route: string | undefined =
+            (user as User).roles
+            ?.map((r: UserRole) => r.nombre.trim().toLowerCase())
+            .find((rol: string) => ROLE_ROUTE[rol]);
 
         if (route) {
             navigate(toAbsolute(ROLE_ROUTE[route]), { replace: true });

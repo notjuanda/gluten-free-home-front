@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { User } from '@/modules/core/types/user.type';
+import type { User } from '../../types/users.types';
 import { adminUsersApi } from '../../api/users.api';
 
 export function useGetUser(id?: number) {

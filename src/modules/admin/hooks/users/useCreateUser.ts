@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { User } from '@/modules/core/types/user.type';
+import type { User } from '../../types/users.types';
 import type { CreateUserInput } from '../../types/users.types';
 import { adminUsersApi } from '../../api/users.api';
 
@@ -13,12 +13,15 @@ export function useCreateUser() {
         const user = await adminUsersApi.create(data);
         setError(null);
         const mappedUser = {
-            ...user,
-            roles: user.roles.map((role: any) => ({
+        ...user,
+        roles: Array.isArray(user.roles)
+            ? user.roles.map((role: any) => ({
                 ...role,
-                permisos: role.permisos ?? []
+                permisos: role.permisos ?? [],
             }))
+            : [],
         };
+        console.log('Usuario creado:', mappedUser);
         return mappedUser;
         } catch (err: any) {
         setError(err.message);

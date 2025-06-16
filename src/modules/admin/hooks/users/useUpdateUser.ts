@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { UpdateUserInput } from '../../types/users.types';
-import type { User } from '@/modules/core/types/user.type';
+import type { User } from '../../types/users.types';
 import { adminUsersApi } from '../../api/users.api';
 
 export function useUpdateUser() {

@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import PageLayout from "../layouts/PageLayout.tsx";
 import Home from "@/modules/home/pages/Home.tsx";
 import LoginPage from "@/modules/auth/pages/Login.tsx";
-import UsersList from "@/modules/admin/components/users/UsersList.tsx";
+import UsersPage from "@/modules/admin/pages/users/UserPage.tsx";
 
 const router = createBrowserRouter([ 
     {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
             },
             {   
                 path: "/admin/dashboard",
-                element: <UsersList />,
+                element: <UsersPage />,
             }
         ],
     },

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import type { User } from '../types/user.type';
+import type { User } from '../types/login.type';
 import api from '../api/instance.api';
 
 interface Props {

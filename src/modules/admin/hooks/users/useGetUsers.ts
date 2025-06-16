@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { User } from '@/modules/core/types/user.type';
+import type { User } from '../../types/users.types';
 import { adminUsersApi } from '../../api/users.api';
 
 export function useGetUsers() {
@@ -23,6 +23,7 @@ export function useGetUsers() {
         })
         .catch((err) => setError(err.message))
         .finally(() => setLoading(false));
+        
     }, []);
 
     return { users, loading, error };

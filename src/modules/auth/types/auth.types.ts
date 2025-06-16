@@ -1,4 +1,4 @@
-import type { User } from '@/modules/core/types/user.type';
+import type { User } from "@/modules/admin/types/users.types";
 
 export type LoginRequest = {
     correo: string;
