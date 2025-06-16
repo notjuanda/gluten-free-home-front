@@ -14,8 +14,8 @@ const FEATURES: Item[] = [
 
 export const FeatureStrip = (): ReactElement => (
   <section className="mt-10 w-full bg-[#7BAF8C] py-8 md:py-10">
-    {/* grid evita overflow y centra todo */}
-    <div className="
+    <div
+      className="
         mx-auto grid max-w-screen-xl
         grid-cols-1 gap-y-8 gap-x-6 px-4
         sm:grid-cols-3
@@ -24,7 +24,7 @@ export const FeatureStrip = (): ReactElement => (
       {FEATURES.map(({ icon: Icon, lines }) => (
         <div
           key={lines.join('-')}
-          className="flex flex-col items-center gap-4 sm:items-start"
+          className="flex flex-col items-center gap-4 sm:flex-row sm:items-center sm:items-start"
         >
           <Icon
             size={96}
