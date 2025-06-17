@@ -1,21 +1,18 @@
 import { useState } from 'react';
-
-import LoadingSpinner  from '@/components/ui/LoadingSpinner';
-import ErrorMessage    from '@/components/ui/ErrorMessage';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
+import ErrorMessage from '@/components/ui/ErrorMessage';
 import { CustomTable } from '@/shared/ui/Table';
 import type { Column } from '@/shared/ui/Table';
-
-import { Chip }        from '@mui/material';
+import { Chip } from '@mui/material';
 import { ActionButton } from '@/shared/ui/ActionButton';
-import { UserCog }      from 'lucide-react';
-
-import type { User }    from '../../types/users.types';
-import AssignRolesModal from '../roles/AssignRolesModal';
+import { UserCog } from 'lucide-react';
+import type { User } from '../../types/users.types';
+import AssignRolesModal from './AssignRolesModal';
 
 interface Props {
-  users:   User[];
+  users: User[];
   loading: boolean;
-  error:   string | null;
+  error: string | null;
   onUserUpdated?: (u: User) => void;
 }
 
@@ -28,7 +25,7 @@ export default function UsersList({
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   if (loading) return <LoadingSpinner />;
-  if (error)   return <ErrorMessage message={error} />;
+  if (error) return <ErrorMessage message={error} />;
 
   const columns: Column<User>[] = [
     {
@@ -68,9 +65,7 @@ export default function UsersList({
       key: 'roles',
       label: 'Roles',
       render: (row) =>
-        row.roles.length
-          ? row.roles.map((r) => r.nombre).join(', ')
-          : '—',
+        row.roles.length ? row.roles.map((r) => r.nombre).join(', ') : '—',
     },
     {
       key: 'createdAt',
@@ -111,11 +106,12 @@ export default function UsersList({
             onClick={() => setSelectedUser(user)}
             className="p-2"
           >
-            <span className="sr-only">Asignar roles a {user.nombreUsuario}</span>
+            <span className="sr-only">
+              Asignar roles a {user.nombreUsuario}
+            </span>
           </ActionButton>
         )}
       />
-
       {selectedUser && (
         <AssignRolesModal
           user={selectedUser}

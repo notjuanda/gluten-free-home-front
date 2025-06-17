@@ -10,6 +10,7 @@ import type {
 
 import type { Ingredient       } from '../types/ingredient.type';
 import type { ProductImage    } from '../types/product-image.type';
+import type { TopProduct } from '../types/topProducts.type';
 
 export const getProducts = async (): Promise<Product[]> =>
     (await api.get<Product[]>('/products')).data;
@@ -81,3 +82,12 @@ export const deleteProductImage = async (
 ): Promise<void> => {
     await api.delete(`/products/${productId}/imagenes/${imageId}`);
 };
+
+export const getTopProducts = async (
+    limit = 10,
+): Promise<TopProduct[]> =>
+    (
+        await api.get<TopProduct[]>(
+            `/products/top${limit ? `?limit=${limit}` : ''}`,
+        )
+    ).data;
