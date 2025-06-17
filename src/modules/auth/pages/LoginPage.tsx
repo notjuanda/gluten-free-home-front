@@ -34,7 +34,7 @@ const LoginPage = () => {
 
         <p className="text-center text-sm">
           ¿Eres nuevo?
-          <Link to="/registro" className="ml-1 underline hover:opacity-80">
+          <Link to="/register" className="ml-1 underline hover:opacity-80">
             Crea una cuenta
           </Link>
         </p>
