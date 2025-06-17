@@ -5,3 +5,10 @@ export type Role = {
     nombre: string;
     permisos: Permission[];
 };
+
+export interface CreateRoleInput {
+    nombre: string;
+    permisosIds?: number[];
+}
+
+export type UpdateRoleInput = Partial<CreateRoleInput>;
