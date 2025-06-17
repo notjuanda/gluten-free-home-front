@@ -6,6 +6,8 @@ import UsersPage from "@/modules/admin/pages/users/UserPage.tsx";
 import RegisterPage from "@/modules/auth/pages/RegisterPage.tsx";
 import VerifyEmailPage from "@/modules/auth/pages/VerifyEmailPage.tsx";
 import RolesPage from "@/modules/admin/pages/roles/RolesPage.tsx";
+import CreateRolePage from "@/modules/admin/pages/roles/CreateRolePage.tsx";
+import EditRolePage from "@/modules/admin/pages/roles/EditRolePage.tsx";
 
 const router = createBrowserRouter([ 
     {
@@ -37,7 +39,15 @@ const router = createBrowserRouter([
             },
             {
                 path: "/admin/permisos",
-                element: < RolesPage/>, // Placeholder for Permisos page
+                element: < RolesPage/>,
+            },
+            {
+                path: "/admin/roles/new",
+                element: <CreateRolePage />,
+            },
+            {
+                path: "/admin/roles/:id/editar",
+                element: <EditRolePage />,
             }
         ],
     },
