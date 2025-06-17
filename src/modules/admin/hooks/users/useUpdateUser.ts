@@ -19,6 +19,7 @@ export function useUpdateUser() {
                 permisos: role.permisos ?? []
             }))
         };
+        console.log('Mapped User:', mappedUser);
         return mappedUser as User;
         } catch (err: any) {
         setError(err.message);
