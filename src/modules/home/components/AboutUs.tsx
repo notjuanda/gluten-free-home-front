@@ -3,7 +3,7 @@ import {
     RiTruckLine,
     RiMedal2Line,
     RiStore2Line,
-    RiCustomerService2Line
+    RiCustomerService2Line,
 } from 'react-icons/ri';
 
 interface Benefit {
@@ -17,35 +17,34 @@ const BENEFITS: Benefit[] = [
         icon: RiTruckLine,
         title: 'Envíos a todo el país',
         description:
-        'Recibe tus productos sin gluten donde estés, con entregas rápidas y seguras.'
+        'Recibe tus productos sin gluten donde estés, con entregas rápidas y seguras.',
     },
     {
         icon: RiMedal2Line,
         title: 'Productos certificados',
         description:
-        'Cada artículo cuenta con sellos que garantizan la ausencia total de gluten.'
+        'Cada artículo cuenta con sellos que garantizan la ausencia total de gluten.',
     },
     {
         icon: RiStore2Line,
         title: 'Proveedores confiables',
         description:
-        'Trabajamos exclusivamente con marcas auditadas y especialistas en alimentos libres de gluten.'
+        'Trabajamos exclusivamente con marcas auditadas y especialistas en alimentos libres de gluten.',
     },
     {
         icon: RiCustomerService2Line,
         title: 'Asesoría personalizada',
         description:
-        'Nuestro equipo responde tus dudas sobre intolerancias y preparaciones sin gluten.'
-    }
+        'Nuestro equipo responde tus dudas sobre intolerancias y preparaciones sin gluten.',
+    },
 ];
 
 export const AboutUs = (): ReactElement => (
-    <section className="w-full bg-white py-24 sm:py-28 lg:py-32">
+    <section id="sobre-nosotros" className="w-full overflow-x-hidden bg-white py-24 sm:py-28 lg:py-32">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-4 sm:px-6 lg:grid-cols-[1.35fr_2fr] lg:gap-24">
         {/* ─────────── Lado izquierdo ─────────── */}
         <div className="flex flex-col">
-            {/* --------   Título en una sola línea   -------- */}
-            <h2 className="mb-6 whitespace-nowrap font-cap-hero text-4xl leading-tight text-black sm:text-5xl lg:text-6xl">
+            <h2 className="mb-6 font-cap-hero text-4xl leading-tight text-black sm:text-5xl lg:text-6xl lg:whitespace-nowrap">
             ¿Quiénes somos?
             </h2>
 
@@ -69,7 +68,7 @@ export const AboutUs = (): ReactElement => (
             {BENEFITS.map(({ icon: Icon, title, description }) => (
             <div key={title} className="flex flex-col gap-4">
                 <div className="flex items-center gap-5">
-                <div className="flex h-22 w-22 items-center justify-center rounded-full bg-highlight/40 text-header">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-highlight/40 text-header sm:h-24 sm:w-24">
                     <Icon size={48} />
                 </div>
                 <h3 className="font-cap-medium text-xl text-black">{title}</h3>

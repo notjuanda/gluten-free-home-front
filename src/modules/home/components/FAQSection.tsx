@@ -35,7 +35,7 @@ const FAQ_DATA: FaqItem[] = [
 ];
 
 export const FAQSection = () => (
-    <section className="mx-auto my-16 w-full max-w-screen-xl px-4 md:my-24">
+    <section id="faqs" className="mx-auto my-16 w-full max-w-screen-xl px-4 md:my-24">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_2fr]">
         {/* Título */}
         <header className="flex flex-col">
