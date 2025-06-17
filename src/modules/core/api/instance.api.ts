@@ -2,49 +2,35 @@ import axios, { AxiosError } from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const apiInstance = axios.create({
+const api = axios.create({
     baseURL: API_BASE_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     withCredentials: true,
 });
 
-apiInstance.interceptors.response.use(
-    (response) => response,
+api.interceptors.response.use(
+    res => res,
     (error: AxiosError) => {
-        let userMessage = 'Ha ocurrido un problema. Inténtalo de nuevo.';
+        let friendly = 'Ha ocurrido un problema. Inténtalo de nuevo.';
 
         if (error.response) {
-            switch (error.response.status) {
-                case 400:
-                    userMessage = 'Parece que hay un error en la información enviada.';
-                    break;
-                case 401:
-                    userMessage = 'No estás autorizado. Inicia sesión nuevamente.';
-                    break;
-                case 403:
-                    userMessage = 'No tienes permisos para realizar esta acción.';
-                    break;
-                case 404:
-                    userMessage = 'Recurso no encontrado.';
-                    break;
-                case 409:
-                    userMessage = 'Conflicto en la petición — quizá el recurso ya existe.';
-                    break;
-                case 500:
-                    userMessage = 'Error interno del servidor. Inténtalo más tarde.';
-                    break;
-                default:
-                    userMessage = 'Algo salió mal. Inténtalo nuevamente.';
-                    break;
-            }
+        switch (error.response.status) {
+            case 400: friendly = 'Parece que hay un error en la información enviada.'; break;
+            case 401: friendly = 'No estás autorizado. Inicia sesión nuevamente.';      break;
+            case 403: friendly = 'No tienes permisos para realizar esta acción.';       break;
+            case 404: friendly = 'Recurso no encontrado.';                              break;
+            case 409: friendly = 'Conflicto en la petición — quizá el recurso ya existe.'; break;
+            case 500: friendly = 'Error interno del servidor. Inténtalo más tarde.';    break;
+            default:  friendly = 'Algo salió mal. Inténtalo nuevamente.';               break;
+        }
         } else if (error.request) {
-            userMessage = 'Sin respuesta del servidor. Verifica tu conexión.';
+        friendly = 'Sin respuesta del servidor. Verifica tu conexión.';
         }
 
-        return Promise.reject(new Error(userMessage));
-    },
+        error.message = friendly;
+
+        return Promise.reject(error);
+    }
 );
 
-export default apiInstance;
+export default api;

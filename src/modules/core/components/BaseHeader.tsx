@@ -82,7 +82,7 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                     <LogIn size={18} /> Iniciar sesión
                 </Link>
                 <Link
-                    to="/registro"
+                    to="/register"
                     className={clsx(
                     buttonBase,
                     'bg-button text-white hover:bg-button/90',
@@ -142,7 +142,7 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                     <LogIn size={18} /> Iniciar sesión
                 </Link>
                 <Link
-                    to="/registro"
+                    to="/register"
                     onClick={() => setOpen(false)}
                     className={clsx(
                     buttonBase,
