@@ -18,7 +18,7 @@ import {
 import { Controller }        from 'react-hook-form';
 import { X }                 from 'lucide-react';
 
-import { useAssignRolesForm } from '../../hooks/roles/useAssignRolesForm';
+import { useAssignRolesForm } from '../../hooks/users/useAssignRolesForm';
 import type { AssignRolesModalProps } from '../../types/assign-roles-modal.types';
 
 export default function AssignRolesModal({
