@@ -11,8 +11,8 @@ export function useDeleteRole() {
         await deleteRole(id);
         setError(null);
         return true;
-        } catch (e: any) {
-        setError(e.message);
+        } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : 'Error desconocido');
         return false;
         } finally {
         setLoading(false);

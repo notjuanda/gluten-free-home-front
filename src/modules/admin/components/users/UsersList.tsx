@@ -53,9 +53,12 @@ export default function UsersList({
                   {user.nombreUsuario?.[0]?.toUpperCase() || <User size={20} />}
                 </span>
                 <div>
-                  <div className="font-semibold text-base text-foreground flex items-center gap-1">
+                  <div className="font-semibold text-base text-foreground flex items-center gap-2">
                     <User size={16} className="text-muted-foreground" />
                     {user.nombreUsuario}
+                    <span className="ml-2 inline-block px-2 py-0.5 rounded bg-muted text-xs font-medium text-muted-foreground border border-muted-foreground/20">
+                      {user.roles && user.roles.length > 0 ? user.roles[0].nombre : 'Sin rol'}
+                    </span>
                   </div>
                   <div className="text-sm text-muted-foreground flex items-center gap-1">
                     <Mail size={14} className="text-muted-foreground" />

@@ -12,8 +12,8 @@ export function useCreateRole() {
         const role = await createRole(data);
         setError(null);
         return role;
-        } catch (e: any) {
-        setError(e.message);
+        } catch (e: unknown) {
+        setError(e instanceof Error ? e.message : 'Error desconocido');
         return null;
         } finally {
         setLoading(false);

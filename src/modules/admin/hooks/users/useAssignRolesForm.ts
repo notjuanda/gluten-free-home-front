@@ -35,7 +35,7 @@ export function useAssignRolesForm(
         if (user && !rolesLoading && roles?.length) {
         reset({ rolesIds: user.roles.map((r) => r.id) });
         }
-    }, [user, rolesLoading, roles, reset]);
+    }, [user, rolesLoading, roles, reset, onClose]);
 
     const onSubmit = handleSubmit(async (values) => {
         const updated = await updateUser(user.id, { rolesIds: values.rolesIds });

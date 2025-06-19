@@ -73,7 +73,7 @@ export function CustomTable<T>({
                                             align={col.align ?? 'left'}
                                             className="px-4 py-3 text-sm"
                                         >
-                                            {col.render ? col.render(row) : (row as any)[col.key]}
+                                            {col.render ? col.render(row) : String((row as Record<string, unknown>)[col.key as string])}
                                         </TableCell>
                                     ))}
                                     {actions && (
