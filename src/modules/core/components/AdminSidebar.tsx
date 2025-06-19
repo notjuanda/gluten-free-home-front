@@ -16,18 +16,35 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ user, logout, children }) =
         }
     };
 
+    // Agrupar enlaces por grupo
+    const groupedLinks = adminLinks.reduce((acc, link) => {
+        const group = link.group || 'OTROS';
+        if (!acc[group]) acc[group] = [];
+        acc[group].push(link);
+        return acc;
+    }, {} as Record<string, typeof adminLinks>);
+
     // Sidebar content (reusable for desktop and mobile)
     const sidebarContent = (
-        <nav className="flex-1 flex flex-col gap-1 mt-8 md:mt-0">
-            {adminLinks.map(link => (
-                <Link
-                    key={link.to}
-                    to={link.to}
-                    className={`px-3 py-2 rounded-md font-cap-link text-base transition-colors hover:bg-highlight/20 hover:text-highlight ${location.pathname === link.to ? 'bg-highlight/30 text-highlight font-bold' : ''}`}
-                    onClick={() => setOpen(false)}
-                >
-                    {link.label}
-                </Link>
+        <nav className="flex-1 flex flex-col gap-4 mt-8 md:mt-0 overflow-y-auto h-full max-h-screen pr-1 scrollbar-none">
+            {Object.entries(groupedLinks).map(([group, links]) => (
+                <div key={group}>
+                    <div className="px-2 py-1 text-xs font-bold uppercase text-muted-foreground tracking-widest mb-1">
+                        {group}
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        {links.map(link => (
+                            <Link
+                                key={link.to}
+                                to={link.to}
+                                className={`px-3 py-2 rounded-md font-cap-link text-base transition-colors hover:bg-highlight/20 hover:text-highlight ${location.pathname === link.to ? 'bg-highlight/30 text-highlight font-bold' : ''}`}
+                                onClick={() => setOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
             ))}
         </nav>
     );
@@ -113,9 +130,3 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ user, logout, children }) =
 };
 
 export default AdminSidebar; 
-
-// Animación para el drawer (agrega esto a tu tailwind.config si quieres animación):
-// 'slide-in-left': {
-//   '0%': { transform: 'translateX(-100%)' },
-//   '100%': { transform: 'translateX(0)' },
-// } 
