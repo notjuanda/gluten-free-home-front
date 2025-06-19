@@ -9,6 +9,7 @@ import RoleHeader from '@/modules/admin/components/roles/RoleHeader'
 import RoleForm from '@/modules/admin/components/roles/RoleForm'
 
 import type { Role } from '@/modules/core/types/role.type'
+import type { RoleFormSchema } from '@/modules/admin/schemas/role.schema'
 
 export default function EditRolePage() {
     const { id } = useParams<{ id: string }>()
@@ -26,7 +27,7 @@ export default function EditRolePage() {
             .catch((e) => setFetchError(e.message))
     }, [id])
 
-    const handleSubmit = async (values: any) => {
+    const handleSubmit = async (values: RoleFormSchema) => {
         if (!role) return
         const updated = await update(role.id, values)
         if (updated) navigate('/admin/permisos')
@@ -36,7 +37,7 @@ export default function EditRolePage() {
     if (!role) return null
 
     return (
-        <div className="mx-auto max-w-3x|l space-y-6 px-4 py-8">
+        <div className="mx-auto max-w-3xl space-y-6 px-4 py-8">
             <RoleHeader id={role.id} name={role.nombre} />
             <RoleForm
                 defaultValues={{ nombre: role.nombre, permisos: role.permisos }}
