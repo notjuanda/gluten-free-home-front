@@ -13,6 +13,8 @@ import CreateProductPage from "@/modules/admin/pages/productos/CreateProductPage
 import BrandsPage from "@/modules/admin/pages/brands/BrandsPage.tsx";
 import CategoriesPage from "@/modules/admin/pages/categories/CategoriesPage.tsx";
 import IngredientsPage from "@/modules/admin/pages/ingredients/IngredientsPage.tsx";
+import OrdersPage from "@/modules/admin/pages/orders/OrdersPage.tsx";
+import PaymentsPage from "@/modules/admin/pages/payments/PaymentsPage.tsx";
 
 const router = createBrowserRouter([ 
     {
@@ -73,7 +75,15 @@ const router = createBrowserRouter([
             {
                 path: "admin/ingredientes",
                 element: <IngredientsPage />,
-            }
+            },
+            {
+                path: "admin/ordenes",
+                element: <OrdersPage />,
+            },
+            {
+                path: "admin/pagos",
+                element: <PaymentsPage />,
+            },
         ],
     },
 ]);

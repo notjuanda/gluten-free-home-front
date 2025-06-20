@@ -35,7 +35,7 @@ export interface CreateOrderInput {
     items: OrderItemInput[];
 }
 
-export type UpdateOrderInput = Partial<CreateOrderInput>;
+export type UpdateOrderInput = Partial<CreateOrderInput> & { estado?: OrderStatus };
 
 export interface AssignAddressInput {
     direccionId: number;

@@ -30,7 +30,6 @@ export const adminLinks: LinkItem[] = [
     // ÓRDENES Y PAGOS
     { to: '/admin/ordenes', label: 'Órdenes', group: 'ÓRDENES Y PAGOS' },
     { to: '/admin/pagos', label: 'Pagos', group: 'ÓRDENES Y PAGOS' },
-    { to: '/admin/direcciones', label: 'Direcciones', group: 'ÓRDENES Y PAGOS' },
 
     // CONTENIDO
     { to: '/admin/articulos', label: 'Artículos', group: 'CONTENIDO' },
