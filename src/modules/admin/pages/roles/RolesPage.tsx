@@ -17,7 +17,7 @@ export default function RolesPage() {
     }, [roles]);
 
     const handleCreateRole = () => {
-        navigate('/admin/roles/new');
+        navigate('/admin/roles/crear');
     };
 
     const handleRoleDeleted = (id: number) => {

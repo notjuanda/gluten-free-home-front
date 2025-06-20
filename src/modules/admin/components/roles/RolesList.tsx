@@ -7,7 +7,7 @@ import PermissionBadges from './PermissionBadge'
 import { ActionButton } from '@/shared/ui/ActionButton'
 import DeleteRoleButton from './DeleteRoleButton'
 
-import type { RoleListProps } from '@/modules/admin/types/role-list.type'
+import type { RoleListProps } from '@/modules/admin/types/roles-components.type'
 
 export default function RolesList({
     roles,

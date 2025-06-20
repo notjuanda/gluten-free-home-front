@@ -5,7 +5,7 @@ import clsx from 'clsx';
 type Variant = 'primary' | 'secondary' | 'danger' | 'neutral';
 
 interface ActionButtonProps {
-    children: ReactNode;
+    children?: ReactNode;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
@@ -52,7 +52,7 @@ export function ActionButton({
         ) : (
             <>
             {iconLeft && <span className="flex-shrink-0">{iconLeft}</span>}
-            <span>{children}</span>
+            {children && <span>{children}</span>}
             {iconRight && <span className="flex-shrink-0">{iconRight}</span>}
             </>
         )}

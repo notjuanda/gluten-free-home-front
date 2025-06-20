@@ -19,8 +19,7 @@ export const adminLinks: LinkItem[] = [
 
     // USUARIOS Y PERMISOS
     { to: '/admin/usuarios', label: 'Usuarios', group: 'USUARIOS Y PERMISOS' },
-    { to: '/admin/roles', label: 'Roles', group: 'USUARIOS Y PERMISOS' },
-    { to: '/admin/permisos', label: 'Permisos', group: 'USUARIOS Y PERMISOS' },
+    { to: '/admin/roles', label: 'Roles y permisos', group: 'USUARIOS Y PERMISOS' },
 
     // PRODUCTOS
     { to: '/admin/productos', label: 'Productos', group: 'PRODUCTOS' },

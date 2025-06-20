@@ -13,7 +13,7 @@ import {
     roleSchema,
     type RoleFormSchema
 } from '@/modules/admin/schemas/role.schema';
-import type { RoleFormProps } from '@/modules/admin/types/role-form.type';
+import type { RoleFormProps } from '@/modules/admin/types/roles-components.type';
 
 export default function RoleForm({
     defaultValues,

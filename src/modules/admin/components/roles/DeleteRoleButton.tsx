@@ -10,7 +10,7 @@ import { Trash2 } from 'lucide-react'
 
 import { ActionButton } from '@/shared/ui/ActionButton'
 import { useDeleteRole } from '@/modules/admin/hooks/roles/useDeleteRole'
-import type { deleteRoleProps } from '../../types/delete-role.type'
+import type { deleteRoleProps } from '../../types/roles-components.type'
 
 export default function DeleteRoleButton({ id, name, onDeleted }: deleteRoleProps) {
     const [open, setOpen] = useState(false)

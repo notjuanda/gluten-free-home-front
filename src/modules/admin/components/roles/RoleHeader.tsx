@@ -1,4 +1,4 @@
-import type { RoleHeaderProps } from "../../types/role-header.type"
+import type { RoleHeaderProps } from "../../types/roles-components.type"
 
 export default function RoleHeader({ id, name }: RoleHeaderProps) {
     return (

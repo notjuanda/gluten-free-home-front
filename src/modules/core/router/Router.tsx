@@ -8,6 +8,11 @@ import VerifyEmailPage from "@/modules/auth/pages/VerifyEmailPage.tsx";
 import RolesPage from "@/modules/admin/pages/roles/RolesPage.tsx";
 import CreateRolePage from "@/modules/admin/pages/roles/CreateRolePage.tsx";
 import EditRolePage from "@/modules/admin/pages/roles/EditRolePage.tsx";
+import ProductsPage from "@/modules/admin/pages/productos/ProductsPage.tsx";
+import CreateProductPage from "@/modules/admin/pages/productos/CreateProductPage.tsx";
+import BrandsPage from "@/modules/admin/pages/brands/BrandsPage.tsx";
+import CategoriesPage from "@/modules/admin/pages/categories/CategoriesPage.tsx";
+import IngredientsPage from "@/modules/admin/pages/ingredients/IngredientsPage.tsx";
 
 const router = createBrowserRouter([ 
     {
@@ -38,16 +43,36 @@ const router = createBrowserRouter([
                 element: <UsersPage />,
             },
             {
-                path: "/admin/permisos",
+                path: "/admin/roles",
                 element: < RolesPage/>,
             },
             {
-                path: "/admin/roles/new",
+                path: "/admin/roles/crear",
                 element: <CreateRolePage />,
             },
             {
                 path: "/admin/roles/:id/editar",
                 element: <EditRolePage />,
+            },
+            {
+                path: "/admin/productos",
+                element: <ProductsPage />,
+            },
+            {
+                path: "/admin/productos/crear",
+                element: <CreateProductPage />,
+            },
+            {
+                path: "admin/marcas",
+                element: <BrandsPage />,
+            },
+            {
+                path: "admin/categorias-producto",
+                element: <CategoriesPage />,
+            },
+            {
+                path: "admin/ingredientes",
+                element: <IngredientsPage />,
             }
         ],
     },

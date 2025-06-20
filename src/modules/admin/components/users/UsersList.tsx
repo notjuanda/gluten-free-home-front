@@ -6,20 +6,14 @@ import { ActionButton } from '@/shared/ui/ActionButton';
 import { UserCog, ChevronDown, ChevronUp, Mail, User, Phone, ShieldCheck, CalendarDays, RefreshCcw } from 'lucide-react';
 import type { User as UserType } from '../../types/users.types';
 import AssignRolesModal from './AssignRolesModal';
-
-interface Props {
-  users: UserType[];
-  loading: boolean;
-  error: string | null;
-  onUserUpdated?: (u: UserType) => void;
-}
+import type { UserListProps } from '../../types/users-components.type';
 
 export default function UsersList({
   users,
   loading,
   error,
   onUserUpdated,
-}: Props) {
+}: UserListProps) {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
 
@@ -126,9 +120,8 @@ export default function UsersList({
                     variant="primary"
                     onClick={() => setSelectedUser(user)}
                     className="p-2 font-semibold shadow-sm hover:shadow-md"
-                  >
-                    Asignar roles
-                  </ActionButton>
+                    aria-label={`Asignar roles a ${user.nombreUsuario}`}
+                  />
                 </div>
               </div>
             </div>

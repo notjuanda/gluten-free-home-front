@@ -5,7 +5,7 @@ const colorRing = [
     'bg-chart-4/15 text-chart-4 border-chart-4/20',
     'bg-chart-5/15 text-chart-5 border-chart-5/20'
 ];
-import type { PermissionBadgeProps } from '@/modules/admin/types/permission-badge.type';
+import type { PermissionBadgeProps } from '@/modules/admin/types/roles-components.type';
 
 export default function PermissionBadges({ permissions }: PermissionBadgeProps) {
     if (!permissions.length)
