@@ -1,10 +1,11 @@
-import type { ReactElement } from 'react';
+import type { ReactElement } from "react";
 import {
     RiTruckLine,
     RiMedal2Line,
     RiStore2Line,
     RiCustomerService2Line,
-} from 'react-icons/ri';
+} from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 interface Benefit {
     icon: React.ElementType;
@@ -40,8 +41,8 @@ const BENEFITS: Benefit[] = [
 ];
 
 export const AboutUs = (): ReactElement => (
-    <section id="sobre-nosotros" className="w-full overflow-x-hidden bg-white py-24 sm:py-28 lg:py-32">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-4 sm:px-6 lg:grid-cols-[1.35fr_2fr] lg:gap-24">
+    <section id="sobre-nosotros" className="w-full overflow-x-hidden bg-background py-24 sm:py-28 lg:py-32">
+        <div className="container mx-auto grid max-w-7xl grid-cols-1 gap-16 px-4 sm:px-6 lg:grid-cols-[1.35fr_2fr] lg:gap-24">
         {/* ─────────── Lado izquierdo ─────────── */}
         <div className="flex flex-col">
             <h2 className="mb-6 font-cap-hero text-4xl leading-tight text-black sm:text-5xl lg:text-6xl lg:whitespace-nowrap">
@@ -55,12 +56,14 @@ export const AboutUs = (): ReactElement => (
             respaldo de proveedores certificados.
             </p>
 
-            <button
-            onClick={() => (window.location.href = '/')}
-            className="w-fit rounded-md bg-highlight px-8 py-3 text-base font-cap-link text-black transition hover:bg-[#83dca3]"
-            >
-            ¡Visita la tienda!
-            </button>
+            <div className="mt-8 flex justify-start">
+                <Link
+                    to="/about"
+                    className="w-fit rounded-lg bg-secondary px-8 py-3 text-base font-cap-link text-secondary-foreground transition hover:brightness-110"
+                >
+                    Conoce más sobre nosotros
+                </Link>
+            </div>
         </div>
 
         {/* ─────────── Beneficios ─────────── */}

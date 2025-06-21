@@ -8,9 +8,7 @@ import type { PageLayoutProps } from "../types/page-layout.type";
 const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
     const { user, logout } = useAuth();
     const location = useLocation();
-    // Detectar si la ruta es de admin
     const isAdminRoute = location.pathname.startsWith('/admin');
-    // Detectar si el usuario es admin
     const isAdmin = user?.roles?.some((r: { nombre: string }) => r.nombre.trim().toLowerCase() === 'admin');
 
     if (isAdminRoute && isAdmin) {

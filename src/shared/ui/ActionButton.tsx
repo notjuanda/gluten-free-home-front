@@ -17,10 +17,10 @@ interface ActionButtonProps {
 }
 
 const variantStyles: Record<Variant, string> = {
-    primary: 'bg-highlight text-black hover:bg-highlight/90',
+    primary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
     secondary: 'bg-muted text-foreground hover:bg-muted/70',
     danger: 'bg-destructive text-destructive-foreground hover:bg-destructive/80',
-    neutral: 'bg-button text-white hover:bg-button/90',
+    neutral: 'bg-primary text-primary-foreground hover:bg-primary/90',
 };
 
 export function ActionButton({

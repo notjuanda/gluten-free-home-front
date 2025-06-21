@@ -4,6 +4,7 @@ import { ShoppingCart, LogIn, LogOut, Menu, X } from 'lucide-react';
 import clsx from 'clsx';
 
 import type { LinkItem } from '../types/link.type';
+import type { User } from '@/modules/admin/types/users.types';
 import { RenderLink } from './RenderLink';
 
 const buttonBase =
@@ -11,7 +12,7 @@ const buttonBase =
 
 interface Props {
     links: LinkItem[];
-    user?: any;
+    user?: User;
     logout?: () => void;
     showSearch?: boolean;
 }
@@ -22,7 +23,7 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
     const toggleMenu    = () => setOpen((o) => !o);
 
     return (
-        <header className="bg-header text-white">
+        <header className="bg-primary text-primary-foreground">
         <div className="mx-auto flex max-w-screen-xl items-center gap-4 px-4 py-3 md:gap-6">
             <Link to="/" className="shrink-0">
             <img
@@ -40,9 +41,9 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
             <input
                 type="search"
                 placeholder="Buscar cualquier cosa"
-                className="hidden w-72 flex-auto rounded-md bg-productBg px-4 py-2
-                        text-sm placeholder:text-gray-300 focus:outline-none
-                        focus:ring-2 focus:ring-highlight md:block"
+                className="hidden w-72 flex-auto rounded-md bg-background px-4 py-2
+                        text-sm placeholder:text-muted-foreground focus:outline-none
+                        focus:ring-2 focus:ring-secondary md:block"
             />
             )}
 
@@ -62,7 +63,7 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                 <button
                     onClick={() => navigate('/carrito')}
                     aria-label="Carrito"
-                    className="rounded-md p-1 hover:bg-black/10"
+                    className="rounded-md p-1 hover:bg-primary-foreground/10"
                 >
                     <ShoppingCart size={22} />
                 </button>
@@ -85,7 +86,7 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                     to="/register"
                     className={clsx(
                     buttonBase,
-                    'bg-button text-white hover:bg-button/90',
+                    'bg-secondary text-secondary-foreground hover:bg-secondary/90',
                     )}
                 >
                     Registrar
@@ -97,7 +98,7 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
 
         <div
             className={clsx(
-            'bg-header transition-[max-height] overflow-hidden md:hidden',
+            'bg-primary transition-[max-height] overflow-hidden md:hidden',
             open ? 'max-h-96' : 'max-h-0',
             )}
         >
@@ -106,9 +107,9 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                 <input
                 type="search"
                 placeholder="Buscar cualquier cosa"
-                className="w-full rounded-md bg-productBg px-4 py-2 text-sm
-                            placeholder:text-gray-300 focus:outline-none
-                            focus:ring-2 focus:ring-highlight"
+                className="w-full rounded-md bg-background px-4 py-2 text-sm
+                            placeholder:text-muted-foreground focus:outline-none
+                            focus:ring-2 focus:ring-secondary"
                 />
             </div>
             )}
@@ -146,7 +147,7 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                     onClick={() => setOpen(false)}
                     className={clsx(
                     buttonBase,
-                    'w-full justify-center bg-button text-white hover:bg-button/90',
+                    'w-full justify-center bg-secondary text-secondary-foreground hover:bg-secondary/90',
                     )}
                 >
                     Registrar

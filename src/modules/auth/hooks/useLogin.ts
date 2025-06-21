@@ -13,7 +13,7 @@ import type {
 const ROLE_ROUTE: Record<string, string> = {
     admin    : '/admin/dashboard',
     vendedor : '/vendedor/dashboard',
-    cliente  : '/cliente/dashboard',
+    cliente  : '/explorar',
     editor   : '/editor/dashboard',
 };
 const toAbs = (p: string) => (p.startsWith('/') ? p : `/${p}`);

@@ -15,6 +15,7 @@ import CategoriesPage from "@/modules/admin/pages/categories/CategoriesPage.tsx"
 import IngredientsPage from "@/modules/admin/pages/ingredients/IngredientsPage.tsx";
 import OrdersPage from "@/modules/admin/pages/orders/OrdersPage.tsx";
 import PaymentsPage from "@/modules/admin/pages/payments/PaymentsPage.tsx";
+import ClientCatalogPage from "@/modules/clients/pages/ClientCatalogPage.tsx";
 
 const router = createBrowserRouter([ 
     {
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
             {
                 path: "admin/pagos",
                 element: <PaymentsPage />,
+            },
+            {
+                path: "explorar",
+                element: <ClientCatalogPage />,
             },
         ],
     },

@@ -11,10 +11,10 @@ const HeroSection: React.FC = () => (
         />
 
         {/* Capa oscura 60 % */}
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-foreground/70" />
 
         {/* Contenido */}
-        <div className="absolute inset-0 flex flex-col justify-center px-6 text-white md:px-14">
+        <div className="absolute inset-0 flex flex-col justify-center px-6 text-background md:px-14">
         <h1 className="font-cap font-cap-hero text-3xl leading-snug md:text-5xl">
             <span className="block">Bienvenido a</span>
             <span >Gluten Free Home</span>
@@ -27,7 +27,7 @@ const HeroSection: React.FC = () => (
         </p>
 
         <NavLink to="/tienda" className="mt-6 w-max">
-            <button className="rounded-md bg-button px-6 py-2 font-cap font-cap-medium text-white transition hover:opacity-90">
+            <button className="rounded-md bg-secondary px-6 py-2 font-cap font-cap-medium text-secondary-foreground transition hover:brightness-110">
             ¡Visita la tienda!
             </button>
         </NavLink>

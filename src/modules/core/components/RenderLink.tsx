@@ -23,7 +23,7 @@ export const RenderLink: FC<Props> = ({ to, label, onClick, closeMobile }) => {
 
     const isActivePath = !targetHash && location.pathname === to;
     const activeCls    = isActiveHash || isActivePath
-        ? 'text-highlight underline decoration-2'
+        ? 'text-secondary underline decoration-2'
         : '';
 
     const handle = () => {

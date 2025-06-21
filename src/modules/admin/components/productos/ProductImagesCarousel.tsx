@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { FiChevronLeft, FiChevronRight, FiX, FiImage } from 'react-icons/fi';
 import DeleteImageButton from './DeleteImageButton';
@@ -13,6 +13,15 @@ export default function ProductImagesCarousel({
 }: ProductImagesCarouselProps) {
     const [currentIndex, setCurrentIndex] = useState(initialIndex);
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+    // Resetear el índice si cambia el array de imágenes
+    useEffect(() => {
+        if (images.length === 0) {
+            setCurrentIndex(0);
+        } else if (currentIndex >= images.length) {
+            setCurrentIndex(images.length - 1);
+        }
+    }, [images, currentIndex]);
 
     if (!isOpen) return null;
 
@@ -41,6 +50,8 @@ export default function ProductImagesCarousel({
         }
         return `${API_BASE_URL}${imageUrl}`; // Concatenar con la URL del backend
     };
+
+    const isValidIndex = images.length > 0 && currentIndex >= 0 && currentIndex < images.length;
 
     const modalContent = (
         <div 
@@ -102,23 +113,26 @@ export default function ProductImagesCarousel({
                                         <FiChevronLeft className="w-6 h-6" />
                                     </button>
                                 )}
-                                
                                 <div className="flex justify-center relative">
-                                    <img
-                                        src={getImageUrl(images[currentIndex].urlImagen)}
-                                        alt={images[currentIndex].textoAlt || `Imagen ${currentIndex + 1} del producto`}
-                                        className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
-                                    />
-                                    
-                                    {/* Botón de eliminar en la imagen principal */}
-                                    <div className="absolute top-4 right-4">
-                                        <DeleteImageButton 
-                                            image={images[currentIndex]} 
-                                            productId={productId}
+                                    {isValidIndex ? (
+                                        <img
+                                            src={getImageUrl(images[currentIndex].urlImagen)}
+                                            alt={images[currentIndex].textoAlt || `Imagen ${currentIndex + 1} del producto`}
+                                            className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
                                         />
-                                    </div>
+                                    ) : (
+                                        <div className="text-white">Imagen no disponible</div>
+                                    )}
+                                    {/* Botón de eliminar en la imagen principal */}
+                                    {isValidIndex && (
+                                        <div className="absolute top-4 right-4">
+                                            <DeleteImageButton 
+                                                image={images[currentIndex]} 
+                                                productId={productId}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
-
                                 {images.length > 1 && (
                                     <button
                                         onClick={handleNext}
@@ -167,7 +181,7 @@ export default function ProductImagesCarousel({
                         )}
 
                         {/* Image Info */}
-                        {images[currentIndex].textoAlt && (
+                        {isValidIndex && images[currentIndex].textoAlt && (
                             <div className="mt-4 text-center text-white">
                                 <p className="text-sm text-gray-300">{images[currentIndex].textoAlt}</p>
                             </div>

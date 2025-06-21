@@ -11,6 +11,7 @@ export const guestLinks: LinkItem[] = [
 export const clientLinks: LinkItem[] = [
     { to: '/', label: 'Inicio' },
     { to: '/blog', label: 'Blog' },
+    { to: '/explorar', label: 'Explorar' },
 ];
 
 export const adminLinks: LinkItem[] = [
