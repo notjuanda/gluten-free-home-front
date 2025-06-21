@@ -1,12 +1,8 @@
 import { useState } from "react";
-import type { Product } from "@/modules/core/types/product.type";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import type { TopProductCardProps } from "../types/products-components.type";
 
-interface Props {
-    product: Product;
-}
-
-const TopProductCard: React.FC<Props> = ({ product }) => {
+const TopProductCard: React.FC<TopProductCardProps> = ({ product }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const images = product.imagenes || [];
@@ -53,6 +49,9 @@ const TopProductCard: React.FC<Props> = ({ product }) => {
                 <p className='truncate font-bold'>{product.nombre}</p>
                 <span className="font-bold text-base">Bs {product.precioBob}</span>
             </div>
+            <button className="bg-black text-white text-xs px-3 py-1 mt-2 cursor-pointer font-mono tracking-tight rounded transition-all duration-200 hover:bg-primary hover:text-primary-foreground">
+                Agregar al carrito
+            </button>
         </div>
     );
 };

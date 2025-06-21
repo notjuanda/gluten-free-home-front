@@ -1,24 +1,7 @@
 import React from 'react';
-import type { ProductCategory } from '@/modules/core/types/product-category.type';
-import type { Brand } from '@/modules/core/types/brand.type';
-import type { Ingredient } from '@/modules/core/types/ingredient.type';
+import type { ProductsFilterSidebarProps } from '../types/products-components.type';
 
-interface FiltersState {
-  categories: number[];
-  brands: number[];
-  ingredients: number[];
-  certified: boolean;
-}
-
-interface Props {
-  filters: FiltersState;
-  setFilters: React.Dispatch<React.SetStateAction<FiltersState>>;
-  categories: ProductCategory[];
-  brands: Brand[];
-  ingredients: Ingredient[];
-}
-
-const ProductsFilterSidebar: React.FC<Props> = ({ filters, setFilters, categories, brands, ingredients }) => {
+const ProductsFilterSidebar: React.FC<ProductsFilterSidebarProps> = ({ filters, setFilters, categories, brands, ingredients }) => {
   const handleMultiCheckbox = (type: 'categories' | 'brands' | 'ingredients', value: number) => {
     setFilters(prev => {
       const list = prev[type] as number[];
