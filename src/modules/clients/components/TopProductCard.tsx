@@ -25,12 +25,12 @@ const TopProductCard: React.FC<Props> = ({ product }) => {
     const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/logo-gluten-free-home.png';
 
     return (
-        <div className="w-44 flex-shrink-0 group p-3 flex flex-col items-center bg-client text-client-foreground border border-border">
-            <div className='relative bg-client flex items-center justify-center h-32 w-full mb-2 border border-border'>
+        <div className="w-44 flex-shrink-0 group p-3 flex flex-col items-center">
+            <div className='relative bg-primary flex items-center justify-center h-32 w-full mb-2'>
                 <img
                     src={mainImageSrc}
                     alt={hasImages ? images[currentIndex]?.textoAlt || product.nombre : product.nombre}
-                    className="max-h-full max-w-full object-contain bg-client"
+                    className="max-h-full max-w-full object-contain bg-primary"
                 />
                 {hasImages && images.length > 1 && (
                     <>
@@ -49,7 +49,7 @@ const TopProductCard: React.FC<Props> = ({ product }) => {
                     </>
                 )}
             </div>
-            <div className="text-xs text-center mt-2 w-full">
+            <div className="text-xs text-center mt-2 w-full text-client-foreground">
                 <p className='truncate font-bold'>{product.nombre}</p>
                 <span className="font-bold text-base">Bs {product.precioBob}</span>
             </div>

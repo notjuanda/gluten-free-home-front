@@ -30,16 +30,47 @@ const ProductCard: React.FC<Props> = ({ product }) => {
     const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/logo-gluten-free-home.png';
 
     return (
-        <div className="bg-client text-client-foreground p-4 flex flex-col items-center min-h-[300px] border border-border">
-        <div className="w-full flex justify-center items-center mb-2">
+        <div className="bg-client text-client-foreground p-4 flex flex-col items-center min-h-[300px] rounded-2xl">
+        <div className="relative flex justify-center items-center mb-2 w-full">
             {isLoading ? (
-                <div className="w-32 h-32 bg-white animate-pulse"></div>
+                <div className="w-32 h-32 bg-primary animate-pulse"></div>
             ) : (
-                <img
-                    src={mainImageSrc}
-                    alt={hasImages ? images[currentIndex]?.textoAlt || product.nombre : product.nombre}
-                    className="w-32 h-32 object-contain bg-white"
-                />
+                <>
+                    <div className="bg-primary flex items-center justify-center h-32 w-32 mx-auto">
+                        <img
+                            src={mainImageSrc}
+                            alt={hasImages ? images[currentIndex]?.textoAlt || product.nombre : product.nombre}
+                            className="max-h-full max-w-full object-contain bg-primary"
+                        />
+                        {hasImages && images.length > 1 && (
+                            <>
+                                <button 
+                                    onClick={handlePrevious} 
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-1 bg-background/80 text-primary opacity-80 hover:opacity-100 transition-opacity"
+                                >
+                                    <FiChevronLeft size={20} />
+                                </button>
+                                <button 
+                                    onClick={handleNext} 
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-1 bg-background/80 text-primary opacity-80 hover:opacity-100 transition-opacity"
+                                >
+                                    <FiChevronRight size={20} />
+                                </button>
+                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
+                                    {images.map((_, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={(e) => goToIndex(e, index)}
+                                            className={`h-2 w-2 rounded-full border border-border transition-colors ${
+                                                currentIndex === index ? 'bg-primary' : 'bg-muted hover:bg-primary/60'
+                                            }`}
+                                        ></button>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </div>
+                </>
             )}
         </div>
         <div className="text-xs text-left w-full mb-2">
