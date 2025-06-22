@@ -61,6 +61,14 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                 {links.map((l) => (
                     <RenderLink key={l.to} {...l} />
                 ))}
+                {user && (
+                    <Link
+                        to="/mis-pedidos"
+                        className="text-sm font-semibold hover:underline transition-colors"
+                    >
+                        Mis Pedidos
+                    </Link>
+                )}
             </nav>
 
             <div className="flex items-center gap-2 md:gap-4">
@@ -149,6 +157,16 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                 closeMobile={() => setOpen(false)}
                 />
             ))}
+
+            {user && (
+                <Link
+                    to="/mis-pedidos"
+                    onClick={() => setOpen(false)}
+                    className="text-base font-semibold hover:underline transition-colors"
+                >
+                    Mis Pedidos
+                </Link>
+            )}
 
             {user ? (
                 <button

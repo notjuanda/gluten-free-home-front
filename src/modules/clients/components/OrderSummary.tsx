@@ -1,7 +1,7 @@
-import { FiShoppingBag, FiTrash2, FiCreditCard } from 'react-icons/fi';
+import { FiShoppingBag, FiTrash2 } from 'react-icons/fi';
 import type { OrderSummaryProps } from '../types/cart-components.type';
 
-const OrderSummary: React.FC<OrderSummaryProps> = ({ cart, onProceedToCheckout, onClearCart }) => {
+const OrderSummary: React.FC<OrderSummaryProps> = ({ cart, onClearCart }) => {
     // Función helper para asegurar que precioBob sea un número
     const formatPrice = (price: any) => {
         const numPrice = Number(price);
@@ -60,27 +60,16 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ cart, onProceedToCheckout, 
                 </div>
             </div>
 
-            {/* Botones de acción */}
-            <div className="space-y-2 sm:space-y-3">
+            {/* Botón de Vaciar Carrito */}
+            {cart.length > 0 && (
                 <button
-                    onClick={onProceedToCheckout}
-                    disabled={cart.length === 0}
-                    className="w-full bg-primary text-primary-foreground py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm sm:text-base"
+                    onClick={onClearCart}
+                    className="w-full bg-destructive/10 text-destructive py-2 px-3 sm:px-4 rounded-lg font-medium hover:bg-destructive/20 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
-                    <FiCreditCard className="w-3 h-3 sm:w-4 sm:h-4" />
-                    {cart.length === 0 ? 'Carrito Vacío' : 'Proceder al Pago'}
+                    <FiTrash2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                    Vaciar Carrito
                 </button>
-
-                {cart.length > 0 && (
-                    <button
-                        onClick={onClearCart}
-                        className="w-full bg-destructive/10 text-destructive py-2 px-3 sm:px-4 rounded-lg font-medium hover:bg-destructive/20 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base"
-                    >
-                        <FiTrash2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                        Vaciar Carrito
-                    </button>
-                )}
-            </div>
+            )}
 
             {/* Información adicional */}
             <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-border">
@@ -97,6 +86,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({ cart, onProceedToCheckout, 
                         <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-purple-500 rounded-full"></div>
                         <span>Devolución gratuita en 30 días</span>
                     </div>
+                </div>
+                <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded text-yellow-800 text-xs">
+                    ⚠️ El monto final en bolivianos puede variar unos centavos por producto debido a la conversión de moneda internacional.
                 </div>
             </div>
         </div>

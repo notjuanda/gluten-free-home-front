@@ -7,11 +7,15 @@ import { useAuth } from '@/modules/core/hooks/useAuth';
 import LoginRequiredModal from '../components/LoginRequiredModal';
 import { useState } from 'react';
 import type { Product } from '@/modules/core/types/product.type';
+import AddressSelector from '../components/AddressSelector';
+import StripeCheckout from '../components/StripeCheckout';
+import { toast } from 'react-toastify';
 
 const CartPage = () => {
     const { cart, removeFromCart, addToCart, clearCart } = useCart();
-    const { isAuthenticated } = useAuth();
+    const { user, isAuthenticated } = useAuth();
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [selectedAddressId, setSelectedAddressId] = useState<number | null>(null);
 
     const handleIncrease = (productId: number) => {
         const item = cart.find(i => i.product.id === productId);
@@ -37,28 +41,20 @@ const CartPage = () => {
         addToCart(product);
     };
 
-    const handleProceedToCheckout = () => {
-        // TODO: Implementar navegación al checkout
-        console.log('Procediendo al checkout...');
-        alert('Funcionalidad de checkout en desarrollo');
-    };
-
     return (
         <div className="min-h-screen bg-background">
             <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-6 sm:py-8">
-                {/* Header */}
                 <div className="mb-6 sm:mb-8">
                     <div className="flex items-center gap-2 sm:gap-3 mb-2">
                         <FiShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-primary" />
                         <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground">Mi Carrito</h1>
                     </div>
                     <p className="text-xs sm:text-sm lg:text-base text-muted-foreground">
-                        Revisa tus productos y procede al pago
+                        Selecciona tu dirección y procede al pago
                     </p>
                 </div>
 
                 {cart.length === 0 ? (
-                    /* Carrito vacío */
                     <div>
                         <div className="text-center py-10 sm:py-12 lg:py-16">
                             <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
@@ -82,7 +78,6 @@ const CartPage = () => {
                         <RecommendedProducts onAddToCart={handleAddToCart} />
                     </div>
                 ) : (
-                    /* Contenido del carrito */
                     <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                         {/* Lista de productos */}
                         <div className="xl:col-span-2">
@@ -99,12 +94,24 @@ const CartPage = () => {
                             </div>
                         </div>
 
-                        {/* Resumen del pedido */}
-                        <div className="xl:col-span-1">
+                        {/* Columna derecha: Dirección y Resumen */}
+                        <div className="xl:col-span-1 space-y-4 sm:space-y-6 lg:space-y-8">
+                            
+                            <AddressSelector 
+                                selectedAddressId={selectedAddressId}
+                                onSelectAddress={setSelectedAddressId}
+                            />
+                            
                             <OrderSummary
                                 cart={cart}
-                                onProceedToCheckout={handleProceedToCheckout}
                                 onClearCart={clearCart}
+                            />
+
+                            <StripeCheckout
+                                usuarioId={user?.id}
+                                direccionEnvioId={selectedAddressId}
+                                onSuccess={() => toast.success('Redirigiendo a la pasarela de pago...')}
+                                onError={(error) => toast.error(error)}
                             />
                         </div>
                     </div>

@@ -17,6 +17,9 @@ import OrdersPage from "@/modules/admin/pages/orders/OrdersPage.tsx";
 import PaymentsPage from "@/modules/admin/pages/payments/PaymentsPage.tsx";
 import ClientCatalogPage from "@/modules/clients/pages/ClientCatalogPage.tsx";
 import CartPage from "@/modules/clients/pages/CartPage.tsx";
+import PaymentSuccessPage from "@/modules/clients/pages/PaymentSuccessPage.tsx";
+import PaymentCancelPage from "@/modules/clients/pages/PaymentCancelPage.tsx";
+import MyOrdersPage from '@/modules/clients/pages/MyOrdersPage.tsx';
 
 const router = createBrowserRouter([ 
     {
@@ -93,6 +96,18 @@ const router = createBrowserRouter([
             {
                 path: '/carrito',
                 element: <CartPage />,
+            },
+            {
+                path: '/payment/success',
+                element: <PaymentSuccessPage />,
+            },
+            {
+                path: '/payment/cancel',
+                element: <PaymentCancelPage />,
+            },
+            {
+                path: '/mis-pedidos',
+                element: <MyOrdersPage />,
             }
         ],
     },

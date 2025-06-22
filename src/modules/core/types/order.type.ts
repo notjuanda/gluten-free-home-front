@@ -12,6 +12,9 @@ export interface Order {
 
     totalBob: number;
     totalUsd?: number;
+    
+    costoEnvioBob: number;
+    costoEnvioUsd?: number;
 
     direccionEnvio?: Address | null;
 
@@ -30,8 +33,10 @@ export interface OrderItemInput {
 }
 
 export interface CreateOrderInput {
+    usuarioId: number;
+    direccionEnvioId: number;
     totalBob: number;
-    totalUsd?: number;
+    costoEnvioBob: number;
     items: OrderItemInput[];
 }
 
