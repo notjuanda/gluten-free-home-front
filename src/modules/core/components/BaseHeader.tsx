@@ -1,4 +1,4 @@
-import { type FC, useState } from 'react';
+import { type FC, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, LogIn, LogOut, Menu, X } from 'lucide-react';
 import clsx from 'clsx';
@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import type { LinkItem } from '../types/link.type';
 import type { User } from '@/modules/admin/types/users.types';
 import { RenderLink } from './RenderLink';
+import { useCart } from '@/modules/clients/context/CartContext';
 
 const buttonBase =
     'flex items-center gap-1 rounded-full px-4 py-1.5 text-sm font-medium transition-colors';
@@ -20,7 +21,18 @@ interface Props {
 export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
     const navigate      = useNavigate();
     const [open, setOpen] = useState(false);
+    const { cartItemCount } = useCart();
+    const [isAnimating, setIsAnimating] = useState(false);
     const toggleMenu    = () => setOpen((o) => !o);
+
+    // Animación cuando cambia el número de productos
+    useEffect(() => {
+        if (cartItemCount > 0) {
+            setIsAnimating(true);
+            const timer = setTimeout(() => setIsAnimating(false), 300);
+            return () => clearTimeout(timer);
+        }
+    }, [cartItemCount]);
 
     return (
         <header className="bg-primary text-primary-foreground">
@@ -63,9 +75,17 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
                 <button
                     onClick={() => navigate('/carrito')}
                     aria-label="Carrito"
-                    className="rounded-md p-1 hover:bg-primary-foreground/10"
+                    className="relative rounded-md p-1 hover:bg-primary-foreground/10"
                 >
                     <ShoppingCart size={22} />
+                    {cartItemCount > 0 && (
+                        <span className={clsx(
+                            "absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold transition-all duration-300",
+                            isAnimating && "scale-125"
+                        )}>
+                            {cartItemCount > 99 ? '99+' : cartItemCount}
+                        </span>
+                    )}
                 </button>
                 <button
                     onClick={() => {
