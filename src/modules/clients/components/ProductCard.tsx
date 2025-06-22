@@ -3,7 +3,7 @@ import { useProductImages } from "../hooks/useProductImages";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import type { TopProductCardProps } from "../types/products-components.type";
 
-const ProductCard: React.FC<TopProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => {
     const { images, isLoading } = useProductImages(product.id);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -73,7 +73,10 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product }) => {
             <p className="font-bold truncate">{product.nombre}</p>
             <span className="font-bold text-lg">Bs {product.precioBob}</span>
         </div>
-        <button className="bg-black text-white text-xs px-3 py-1 mt-auto cursor-pointer font-mono tracking-tight rounded transition-all duration-200 hover:bg-primary hover:text-primary-foreground">
+        <button 
+            className="bg-black text-white text-xs px-3 py-1 mt-auto cursor-pointer font-mono tracking-tight rounded transition-all duration-200 hover:bg-primary hover:text-primary-foreground"
+            onClick={() => onAddToCart(product)}
+        >
             Agregar al carrito
         </button>
         </div>
