@@ -43,7 +43,8 @@ const StripeCheckout = ({ usuarioId, direccionEnvioId, onSuccess, onError }: Str
                 return total + (Number(item.product.precioBob) * item.quantity);
             }, 0);
 
-            const shippingCost = 15; // Costo de envío fijo
+            // Envío gratuito si el subtotal es mayor o igual a 100 Bs
+            const shippingCost = subtotal >= 100 ? 0 : 15;
             const total = subtotal + shippingCost;
 
             // Crear la orden enviando solo los montos en BOB
