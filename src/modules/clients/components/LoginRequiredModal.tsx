@@ -1,11 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import type { LoginRequiredModalProps } from '../types/products-components.type';
 
-interface Props {
-    visible: boolean;
-    onClose: () => void;
-}
-
-const LoginRequiredModal: React.FC<Props> = ({ visible, onClose }) => {
+const LoginRequiredModal: React.FC<LoginRequiredModalProps> = ({ visible, onClose }) => {
     const navigate = useNavigate();
 
     if (!visible) return null;

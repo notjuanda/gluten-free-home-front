@@ -4,13 +4,7 @@ import { useCreateOrder } from '../hooks/useCreateOrder';
 import { useStripeCheckout } from '../hooks/useStripeCheckout';
 import { useAuth } from '@/modules/core/hooks/useAuth';
 import { Loader2, CreditCard } from 'lucide-react';
-
-interface StripeCheckoutProps {
-    usuarioId: number | undefined;
-    direccionEnvioId: number | null;
-    onSuccess?: () => void;
-    onError?: (error: string) => void;
-}
+import type { StripeCheckoutProps } from '../types/products-components.type';
 
 const StripeCheckout = ({ usuarioId, direccionEnvioId, onSuccess, onError }: StripeCheckoutProps) => {
     const { cart, clearCart } = useCart();

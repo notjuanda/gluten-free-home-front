@@ -1,7 +1,6 @@
 import { useCart } from '../context/CartContext';
 import CartItemCard from '../components/CartItemCard';
 import OrderSummary from '../components/OrderSummary';
-import RecommendedProducts from '../components/RecommendedProducts';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useAuth } from '@/modules/core/hooks/useAuth';
 import LoginRequiredModal from '../components/LoginRequiredModal';
@@ -10,12 +9,15 @@ import type { Product } from '@/modules/core/types/product.type';
 import AddressSelector from '../components/AddressSelector';
 import StripeCheckout from '../components/StripeCheckout';
 import { toast } from 'react-toastify';
+import { useProducts } from '../hooks/useProducts';
+import { RecommendedProductsSection } from '../components/RecommendedProducts';
 
 const CartPage = () => {
     const { cart, removeFromCart, addToCart, clearCart } = useCart();
     const { user, isAuthenticated } = useAuth();
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [selectedAddressId, setSelectedAddressId] = useState<number | null>(null);
+    const { topProducts } = useProducts();
 
     const handleIncrease = (productId: number) => {
         const item = cart.find(i => i.product.id === productId);
@@ -75,7 +77,7 @@ const CartPage = () => {
                         </div>
                         
                         {/* Productos recomendados */}
-                        <RecommendedProducts onAddToCart={handleAddToCart} />
+                        <RecommendedProductsSection products={topProducts} onAddToCart={handleAddToCart} />
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">

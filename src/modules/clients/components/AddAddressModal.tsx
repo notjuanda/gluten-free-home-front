@@ -5,11 +5,7 @@ import { useCreateAddress } from '../hooks/useCreateAddress';
 import { addressSchema, type AddressSchema } from '../schemas/address.schema';
 import { X, Loader2 } from 'lucide-react';
 import { useEffect } from 'react';
-
-interface AddAddressModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
+import type { AddAddressModalProps } from '../types/products-components.type';
 
 const AddAddressModal: React.FC<AddAddressModalProps> = ({ isOpen, onClose }) => {
     const { user } = useAuth();

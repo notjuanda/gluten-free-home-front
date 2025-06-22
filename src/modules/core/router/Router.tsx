@@ -20,6 +20,7 @@ import CartPage from "@/modules/clients/pages/CartPage.tsx";
 import PaymentSuccessPage from "@/modules/clients/pages/PaymentSuccessPage.tsx";
 import PaymentCancelPage from "@/modules/clients/pages/PaymentCancelPage.tsx";
 import MyOrdersPage from '@/modules/clients/pages/MyOrdersPage.tsx';
+import ProductDetailPage from '@/modules/clients/pages/ProductDetailPage';
 
 const router = createBrowserRouter([ 
     {
@@ -108,7 +109,11 @@ const router = createBrowserRouter([
             {
                 path: '/mis-pedidos',
                 element: <MyOrdersPage />,
-            }
+            },
+            {
+                path: '/producto/:id',
+                element: <ProductDetailPage />,
+            },
         ],
     },
 ]);

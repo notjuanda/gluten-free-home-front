@@ -4,11 +4,7 @@ import { Loader2, MapPin, PlusCircle } from 'lucide-react';
 import type { Address } from '@/modules/core/types/address.type';
 import clsx from 'clsx';
 import AddAddressModal from './AddAddressModal';
-
-interface AddressSelectorProps {
-    selectedAddressId: number | null;
-    onSelectAddress: (id: number) => void;
-}
+import type { AddressSelectorProps } from '../types/products-components.type';
 
 const AddressSelector: React.FC<AddressSelectorProps> = ({ selectedAddressId, onSelectAddress }) => {
     const { data: addresses, isLoading, error } = useMyAddresses();

@@ -31,3 +31,41 @@ export interface ProductsFilterSidebarProps {
 export interface TopProductCardProps {
     product: Product;
 }
+
+export interface RecommendedProductsSectionProps {
+    products: Product[];
+    onAddToCart: (product: Product) => void;
+    title?: string;
+    subtitle?: string;
+}
+
+export interface RecommendedProductsProps {
+    onAddToCart: (product: Product) => void;
+}
+
+export interface ProductDetailProps {
+    product: Product;
+    onAddToCart: (product: Product) => void;
+}
+
+export interface LoginRequiredModalProps {
+    visible: boolean;
+    onClose: () => void;
+}
+
+export interface AddressSelectorProps {
+    selectedAddressId: number | null;
+    onSelectAddress: (id: number) => void;
+}
+
+export interface AddAddressModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export interface StripeCheckoutProps {
+    usuarioId: number | undefined;
+    direccionEnvioId: number | null;
+    onSuccess?: () => void;
+    onError?: (error: string) => void;
+}

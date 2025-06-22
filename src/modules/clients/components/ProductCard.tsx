@@ -2,10 +2,16 @@ import { useState } from "react";
 import { useProductImages } from "../hooks/useProductImages";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import type { TopProductCardProps } from "../types/products-components.type";
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => {
     const { images, isLoading } = useProductImages(product.id);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
+
+    const handleCardClick = () => {
+        navigate(`/producto/${product.id}`);
+    };
 
     const handlePrevious = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -26,7 +32,7 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => 
     const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/logo-gluten-free-home.png';
 
     return (
-        <div className="bg-client text-client-foreground p-3 sm:p-4 flex flex-col items-center min-h-[280px] sm:min-h-[300px] lg:min-h-[320px] rounded-xl sm:rounded-2xl transition-all duration-200 hover:scale-[1.02] sm:hover:scale-[1.03] hover:shadow-lg">
+        <div className="bg-client text-client-foreground p-3 sm:p-4 flex flex-col items-center min-h-[280px] sm:min-h-[300px] lg:min-h-[320px] rounded-xl sm:rounded-2xl transition-all duration-200 hover:scale-[1.02] sm:hover:scale-[1.03] hover:shadow-lg cursor-pointer" onClick={handleCardClick}>
         <div className="relative flex justify-center items-center mb-2 w-full">
             {isLoading ? (
                 <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-primary animate-pulse rounded-lg"></div>
@@ -79,7 +85,7 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => 
         </div>
         <button 
             className="bg-black text-white text-xs sm:text-sm px-0.5 sm:px-0.5 py-0.5 sm:py-0.5 mt-auto cursor-pointer font-mono tracking-tight rounded transition-all duration-200 hover:bg-primary hover:text-primary-foreground w-full"
-            onClick={() => onAddToCart(product)}
+            onClick={e => { e.stopPropagation(); onAddToCart(product); }}
         >
             Agregar
         </button>
