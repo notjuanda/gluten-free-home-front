@@ -3,7 +3,7 @@ import { useProductImages } from "../hooks/useProductImages";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import type { TopProductCardProps } from "../types/products-components.type";
 
-const ProductCard: React.FC<TopProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => {
     const { images, isLoading } = useProductImages(product.id);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -26,13 +26,13 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product }) => {
     const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/logo-gluten-free-home.png';
 
     return (
-        <div className="bg-client text-client-foreground p-4 flex flex-col items-center min-h-[300px] rounded-2xl transition-all duration-200 hover:scale-[1.03] hover:shadow-lg">
+        <div className="bg-client text-client-foreground p-3 sm:p-4 flex flex-col items-center min-h-[280px] sm:min-h-[300px] lg:min-h-[320px] rounded-xl sm:rounded-2xl transition-all duration-200 hover:scale-[1.02] sm:hover:scale-[1.03] hover:shadow-lg">
         <div className="relative flex justify-center items-center mb-2 w-full">
             {isLoading ? (
-                <div className="w-32 h-32 bg-primary animate-pulse"></div>
+                <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-primary animate-pulse rounded-lg"></div>
             ) : (
                 <>
-                    <div className="bg-primary flex items-center justify-center h-32 w-32 mx-auto">
+                    <div className="bg-primary flex items-center justify-center h-24 w-24 sm:h-28 sm:w-28 lg:h-32 lg:w-32 mx-auto rounded-lg overflow-hidden">
                         <img
                             src={mainImageSrc}
                             alt={hasImages ? images[currentIndex]?.textoAlt || product.nombre : product.nombre}
@@ -42,22 +42,22 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product }) => {
                             <>
                                 <button 
                                     onClick={handlePrevious} 
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-1 bg-background/80 text-primary opacity-80 hover:opacity-100 transition-opacity"
+                                    className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-10 p-1 sm:p-1.5 bg-background/80 text-primary opacity-80 hover:opacity-100 transition-opacity rounded"
                                 >
-                                    <FiChevronLeft size={20} />
+                                    <FiChevronLeft size={16} className="sm:w-5 sm:h-5" />
                                 </button>
                                 <button 
                                     onClick={handleNext} 
-                                    className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-1 bg-background/80 text-primary opacity-80 hover:opacity-100 transition-opacity"
+                                    className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-10 p-1 sm:p-1.5 bg-background/80 text-primary opacity-80 hover:opacity-100 transition-opacity rounded"
                                 >
-                                    <FiChevronRight size={20} />
+                                    <FiChevronRight size={16} className="sm:w-5 sm:h-5" />
                                 </button>
-                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
+                                <div className="absolute bottom-1 sm:bottom-2 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-2">
                                     {images.map((_, index) => (
                                         <button
                                             key={index}
                                             onClick={(e) => goToIndex(e, index)}
-                                            className={`h-2 w-2 rounded-full border border-border transition-colors ${
+                                            className={`h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full border border-border transition-colors ${
                                                 currentIndex === index ? 'bg-primary' : 'bg-muted hover:bg-primary/60'
                                             }`}
                                         ></button>
@@ -69,12 +69,19 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product }) => {
                 </>
             )}
         </div>
-        <div className="text-xs text-left w-full mb-2">
-            <p className="font-bold truncate">{product.nombre}</p>
-            <span className="font-bold text-lg">Bs {product.precioBob}</span>
+        <div className="w-full flex-grow flex flex-col text-left mb-2">
+            <p className="font-bold text-[10px] sm:text-xs lg:text-sm leading-tight min-h-[2.5em]">
+                {product.nombre}
+            </p>
+            <div className="mt-auto">
+                <span className="font-bold text-base sm:text-lg lg:text-xl">Bs {product.precioBob}</span>
+            </div>
         </div>
-        <button className="bg-black text-white text-xs px-3 py-1 mt-auto cursor-pointer font-mono tracking-tight rounded transition-all duration-200 hover:bg-primary hover:text-primary-foreground">
-            Agregar al carrito
+        <button 
+            className="bg-black text-white text-xs sm:text-sm px-0.5 sm:px-0.5 py-0.5 sm:py-0.5 mt-auto cursor-pointer font-mono tracking-tight rounded transition-all duration-200 hover:bg-primary hover:text-primary-foreground w-full"
+            onClick={() => onAddToCart(product)}
+        >
+            Agregar
         </button>
         </div>
     );

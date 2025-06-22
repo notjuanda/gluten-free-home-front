@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import type { User } from '../types/login.type';
+import type { User } from '@/modules/admin/types/users.types';
 import api from '../api/instance.api';
 
 interface Props {
@@ -34,8 +34,17 @@ export const AuthProvider = ({ children }: Props) => {
     );
 
     const logout = useCallback(async () => {
-        await api.post('/auth/logout');
-        setUser(null);
+        try {
+            await api.post('/auth/logout');
+            // Limpiar el carrito del localStorage
+            localStorage.removeItem('cart_items');
+            setUser(null);
+        } catch (error) {
+            console.error('Error durante el logout:', error);
+            // Aún así limpiar el carrito
+            localStorage.removeItem('cart_items');
+            setUser(null);
+        }
     }, []);
 
     useEffect(() => {

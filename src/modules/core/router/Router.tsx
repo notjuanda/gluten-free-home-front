@@ -16,6 +16,7 @@ import IngredientsPage from "@/modules/admin/pages/ingredients/IngredientsPage.t
 import OrdersPage from "@/modules/admin/pages/orders/OrdersPage.tsx";
 import PaymentsPage from "@/modules/admin/pages/payments/PaymentsPage.tsx";
 import ClientCatalogPage from "@/modules/clients/pages/ClientCatalogPage.tsx";
+import CartPage from "@/modules/clients/pages/CartPage.tsx";
 
 const router = createBrowserRouter([ 
     {
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
                 path: "explorar",
                 element: <ClientCatalogPage />,
             },
+            {
+                path: '/carrito',
+                element: <CartPage />,
+            }
         ],
     },
 ]);

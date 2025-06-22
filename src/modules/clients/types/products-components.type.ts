@@ -5,10 +5,12 @@ import type { Product } from "@/modules/core/types/product.type";
 
 export interface TopProductCardProps {
     product: Product;
+    onAddToCart: (product: Product) => void;
 }
 
 export interface ProductsListProps {
     products: Product[];
+    onAddToCart: (product: Product) => void;
 }
 
 export interface FiltersState {
