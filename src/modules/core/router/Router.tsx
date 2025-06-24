@@ -21,6 +21,9 @@ import PaymentSuccessPage from "@/modules/clients/pages/PaymentSuccessPage.tsx";
 import PaymentCancelPage from "@/modules/clients/pages/PaymentCancelPage.tsx";
 import MyOrdersPage from '@/modules/clients/pages/MyOrdersPage.tsx';
 import ProductDetailPage from '@/modules/clients/pages/ProductDetailPage';
+import ArticlesPage from "@/modules/admin/pages/articles/ArticlesPage.tsx";
+import CreateArticlePage from "@/modules/admin/pages/articles/CreateArticlePage.tsx";
+import EditArticlePage from "@/modules/admin/pages/articles/EditArticlePage.tsx";
 
 const router = createBrowserRouter([ 
     {
@@ -89,6 +92,18 @@ const router = createBrowserRouter([
             {
                 path: "admin/pagos",
                 element: <PaymentsPage />,
+            },
+            {
+                path: "admin/articulos",
+                element: <ArticlesPage />,
+            },
+            {
+                path: "admin/articulos/:id/editar",
+                element: <EditArticlePage />,
+            },
+            {
+                path: "admin/articulos/crear",
+                element: <CreateArticlePage />,
             },
             {
                 path: "explorar",

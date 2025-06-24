@@ -8,7 +8,7 @@ export interface Article {
     autor?: User;
     titulo: string;
     slug: string;
-    contenidoMd: string;
+    contenidoBloques: ArticleBlock[];
     resumen?: string;
     urlPortada?: string;
     textoAltPortada?: string;
@@ -22,10 +22,17 @@ export interface Article {
     comentarios?: Comment[];
 }
 
+export interface ArticleBlock {
+    id: string;
+    type: string;
+    data: Record<string, any>;
+    order: number;
+}
+
 export interface CreateArticleInput {
     titulo: string;
     slug: string;
-    contenidoMd: string;
+    contenidoBloques: ArticleBlock[];
     resumen?: string;
     urlPortada?: string;
     textoAltPortada?: string;
