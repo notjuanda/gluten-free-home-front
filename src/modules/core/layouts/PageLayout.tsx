@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import AdminSidebar from "../components/AdminSidebar";
+import { ChatbotWidget } from "@/modules/chatbot/components/ChatbotWidget";
 import { useAuth } from "../hooks/useAuth";
 import type { PageLayoutProps } from "../types/page-layout.type";
 
@@ -14,11 +15,12 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
     if (isAdminRoute && isAdmin) {
         return (
             <div className="overflow-x-hidden min-h-screen">
-                <AdminSidebar user={user} logout={logout}>
+                <AdminSidebar user={user || undefined} logout={logout}>
                     <main className="py-4 w-full">
                         {children ? children : <Outlet />}
                     </main>
                 </AdminSidebar>
+                <ChatbotWidget />
             </div>
         );
     }
@@ -30,6 +32,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
                     {children ? children : <Outlet />}
                 </main>
             </div>
+            <ChatbotWidget />
         </div>
     );
 };
