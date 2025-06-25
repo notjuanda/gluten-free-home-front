@@ -8,7 +8,7 @@ import type { StripeCheckoutProps } from '../types/products-components.type';
 
 const StripeCheckout = ({ usuarioId, direccionEnvioId, onSuccess, onError }: StripeCheckoutProps) => {
     const { cart, clearCart } = useCart();
-    const { user } = useAuth();
+    const { user: _user } = useAuth();
     const createOrder = useCreateOrder();
     const stripeCheckout = useStripeCheckout();
     const [isProcessing, setIsProcessing] = useState(false);

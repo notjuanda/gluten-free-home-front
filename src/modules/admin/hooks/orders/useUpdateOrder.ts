@@ -13,7 +13,7 @@ export function useUpdateOrder({ onSuccess, onError }: UseUpdateOrderProps) {
     return useMutation({
         mutationFn: ({ id, payload }: { id: number; payload: UpdateOrderInput }) =>
             updateOrder(id, payload),
-        onSuccess: (data, variables) => {
+        onSuccess: (_data, variables) => {
             // Invalidate and refetch orders
             queryClient.invalidateQueries({ queryKey: ['orders'] });
             queryClient.invalidateQueries({ queryKey: ['order', variables.id] });

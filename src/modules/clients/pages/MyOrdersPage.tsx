@@ -1,4 +1,3 @@
-import React from 'react';
 import MyOrdersList from '../components/MyOrdersList';
 
 const MyOrdersPage = () => {

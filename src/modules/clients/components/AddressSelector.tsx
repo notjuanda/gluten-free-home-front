@@ -7,7 +7,7 @@ import AddAddressModal from './AddAddressModal';
 import type { AddressSelectorProps } from '../types/products-components.type';
 
 const AddressSelector: React.FC<AddressSelectorProps> = ({ selectedAddressId, onSelectAddress }) => {
-    const { data: addresses, isLoading, error } = useMyAddresses();
+    const { data: addresses, isLoading, error, refetch } = useMyAddresses();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     if (isLoading) {
@@ -22,7 +22,13 @@ const AddressSelector: React.FC<AddressSelectorProps> = ({ selectedAddressId, on
     if (error) {
         return (
             <div className="p-4 bg-destructive/10 text-destructive rounded-lg">
-                Error al cargar las direcciones: {error.message}
+                <p>Error al cargar las direcciones: {error.message}</p>
+                <button 
+                    onClick={() => refetch()}
+                    className="mt-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg"
+                >
+                    Reintentar
+                </button>
             </div>
         );
     }

@@ -4,7 +4,7 @@ import { CheckCircle, Package, Home, ShoppingBag } from 'lucide-react';
 
 const PaymentSuccessPage = () => {
     const [searchParams] = useSearchParams();
-    const [orderId, setOrderId] = useState<string>('');
+    const [_orderId, _setOrderId] = useState<string>('');
 
     useEffect(() => {
         const sessionId = searchParams.get('session_id');

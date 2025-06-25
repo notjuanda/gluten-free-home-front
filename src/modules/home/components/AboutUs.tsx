@@ -5,8 +5,6 @@ import {
     RiStore2Line,
     RiCustomerService2Line,
 } from "react-icons/ri";
-import { Link } from "react-router-dom";
-
 interface Benefit {
     icon: React.ElementType;
     title: string;
@@ -55,15 +53,6 @@ export const AboutUs = (): ReactElement => (
             tranquilidad de alimentarte sin riesgos, con la mejor variedad y el
             respaldo de proveedores certificados.
             </p>
-
-            <div className="mt-8 flex justify-start">
-                <Link
-                    to="/about"
-                    className="w-fit rounded-lg bg-secondary px-8 py-3 text-base font-cap-link text-secondary-foreground transition hover:brightness-110"
-                >
-                    Conoce más sobre nosotros
-                </Link>
-            </div>
         </div>
 
         {/* ─────────── Beneficios ─────────── */}
