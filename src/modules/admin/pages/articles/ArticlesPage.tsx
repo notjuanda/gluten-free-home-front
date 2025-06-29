@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FiPlus } from "react-icons/fi";
 
 export default function ArticlesPage() {
-    const { articles, loading, error } = useGetArticles();
+    const { articles, loading, error, refetch } = useGetArticles();
     const navigate = useNavigate();
 
     return (
@@ -20,7 +20,7 @@ export default function ArticlesPage() {
                     <span className="hidden sm:inline">Agregar</span>
                 </button>
             </div>
-            <ArticlesList articles={articles} loading={loading} error={error} />
+            <ArticlesList articles={articles} loading={loading} error={error} refetch={refetch} />
         </div>
     );
 } 

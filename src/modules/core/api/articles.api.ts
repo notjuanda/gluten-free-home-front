@@ -49,3 +49,26 @@ export const getArticleCategories = async (
     id: number,
 ): Promise<BlogCategory[]> =>
     (await api.get<BlogCategory[]>(`/articles/${id}/categorias`)).data;
+
+export const uploadArticlePortada = async (
+    id: number,
+    file: File,
+    textoAlt?: string,
+): Promise<Article> => {
+    const formData = new FormData();
+    formData.append('file', file);
+    if (textoAlt) formData.append('textoAlt', textoAlt);
+    
+    return (await api.patch<Article>(`/articles/${id}/portada`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    })).data;
+};
+
+export const uploadBlockImage = async (file: File): Promise<{ url: string }> => {
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    return (await api.post<{ url: string }>('/articles/upload-block-image', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+    })).data;
+};

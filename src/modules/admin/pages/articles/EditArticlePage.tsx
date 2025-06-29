@@ -1,40 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import type { UpdateArticleInput } from "@/modules/core/types/article.type";
+import type { UpdateArticleInput, ArticleBlock } from "@/modules/core/types/article.type";
 import { PublicationStatus } from "@/modules/core/enums/publication-status.enum";
 import { useGetArticle } from "@/modules/admin/hooks/articles/useGetArticle";
 import { useUpdateArticle } from "@/modules/admin/hooks/articles/useUpdateArticle";
-import ArticleTiptapEditor from "@/modules/admin/components/articles/ArticleTiptapEditor";
-import type { JSONContent } from "@tiptap/react";
+import CustomBlockEditor from "@/modules/admin/components/articles/CustomBlockEditor";
+import ArticlePortadaInfo from "@/modules/admin/components/articles/ArticlePortadaInfo";
+import { FiArrowLeft, FiSave, FiFileText } from "react-icons/fi";
 
 const estados = [
     { value: PublicationStatus.BORRADOR, label: "Borrador" },
     { value: PublicationStatus.PENDIENTE_REVISION, label: "Pendiente de revisión" },
     { value: PublicationStatus.PUBLICADO, label: "Publicado" },
 ];
-
-function articleBlocksToTiptap(blocks: any[]): JSONContent {
-    const content = blocks
-        ?.map((block: any) => block.data)
-        .filter((node: any) => !!node);
-
-    return {
-        type: 'doc',
-        content: content.length > 0 ? content : [
-            { type: 'paragraph', content: [{ type: 'text', text: '' }] }
-        ],
-    };
-}
-
-function tiptapToArticleBlocks(json: JSONContent): any[] {
-    if (!json || !Array.isArray(json.content)) return [];
-    return json.content.map((block: any, idx: number) => ({
-        id: `${Date.now()}-${idx}`,
-        type: block.type,
-        data: block,
-        order: idx + 1,
-    }));
-}
 
 const EditArticlePage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -43,7 +21,7 @@ const EditArticlePage: React.FC = () => {
     const { update, loading: loadingUpdate, error: errorUpdate } = useUpdateArticle();
 
     const [form, setForm] = useState<Partial<UpdateArticleInput>>({});
-    const [editorContent, setEditorContent] = useState<JSONContent | undefined>(undefined);
+    const [editorContent, setEditorContent] = useState<ArticleBlock[]>([]);
 
     useEffect(() => {
         if (article) {
@@ -53,7 +31,9 @@ const EditArticlePage: React.FC = () => {
                 resumen: article.resumen,
                 estadoPublicacion: article.estadoPublicacion,
             });
-            setEditorContent(articleBlocksToTiptap(article.contenidoBloques));
+            
+            // Usar directamente los bloques del artículo
+            setEditorContent(article.contenidoBloques || []);
         }
     }, [article]);
 
@@ -61,87 +41,194 @@ const EditArticlePage: React.FC = () => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleContentChange = (content: JSONContent) => {
-        setEditorContent(content);
-    };
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const blocks = tiptapToArticleBlocks(editorContent || {});
+        
+        if (!form.titulo?.trim()) {
+            alert("El título es obligatorio");
+            return;
+        }
+
+        if (!form.slug?.trim()) {
+            alert("El slug es obligatorio");
+            return;
+        }
+
+        // NO incluir urlPortada ni textoAltPortada en el update general
+        // Estos se manejan por separado con el endpoint de subida de imagen
+        const { urlPortada, textoAltPortada, ...updateData } = form;
+        
         const result = await update(Number(id), {
-            ...form,
-            contenidoBloques: blocks,
+            ...updateData,
+            contenidoBloques: editorContent,
         });
+        
         if (result) {
             navigate("/admin/articulos");
         }
     };
 
-    if (loadingArticle) return <div>Cargando artículo...</div>;
-    if (errorArticle) return <div className="text-red-500">{errorArticle}</div>;
+    if (loadingArticle) return (
+        <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center">
+            <div className="text-center">
+                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <p className="text-gray-600">Cargando artículo...</p>
+            </div>
+        </div>
+    );
+    
+    if (errorArticle) return (
+        <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center">
+            <div className="text-center text-red-600">
+                <p className="font-semibold">{errorArticle}</p>
+                <button
+                    onClick={() => navigate("/admin/articulos")}
+                    className="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark"
+                >
+                    Volver a la lista
+                </button>
+            </div>
+        </div>
+    );
 
     return (
-        <div className="max-w-3xl mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Editar artículo</h1>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                    <label className="block font-medium">Título</label>
-                    <input
-                        type="text"
-                        name="titulo"
-                        value={form.titulo || ""}
-                        onChange={handleChange}
-                        className="w-full border rounded p-2"
-                        required
-                    />
-                </div>
-                <div>
-                    <label className="block font-medium">Slug</label>
-                    <input
-                        type="text"
-                        name="slug"
-                        value={form.slug || ""}
-                        onChange={handleChange}
-                        className="w-full border rounded p-2"
-                        required
-                    />
-                </div>
-                <div>
-                    <label className="block font-medium">Resumen</label>
-                    <textarea
-                        name="resumen"
-                        value={form.resumen || ""}
-                        onChange={handleChange}
-                        className="w-full border rounded p-2"
-                        rows={2}
-                    />
-                </div>
-                <div>
-                    <label className="block font-medium">Estado de publicación</label>
-                    <select
-                        name="estadoPublicacion"
-                        value={form.estadoPublicacion}
-                        onChange={handleChange}
-                        className="w-full border rounded p-2"
+        <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10">
+            <div className="max-w-4xl mx-auto p-6">
+                {/* Header */}
+                <div className="flex items-center gap-4 mb-8">
+                    <button
+                        onClick={() => navigate("/admin/articulos")}
+                        className="p-2 rounded-lg bg-white/80 hover:bg-white shadow-md transition-colors"
                     >
-                        {estados.map((op) => (
-                            <option key={op.value} value={op.value}>{op.label}</option>
-                        ))}
-                    </select>
+                        <FiArrowLeft className="w-5 h-5" />
+                    </button>
+                    <div>
+                        <h1 className="text-3xl font-bold text-gray-900">Editar Artículo</h1>
+                        <p className="text-gray-600">Modifica la información del artículo</p>
+                    </div>
                 </div>
-                <div>
-                    <label className="block font-medium mb-1">Contenido</label>
-                    <ArticleTiptapEditor value={editorContent || {}} onChange={handleContentChange} />
-                </div>
-                {errorUpdate && <div className="text-red-500">{errorUpdate}</div>}
-                <button
-                    type="submit"
-                    className="bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
-                    disabled={loadingUpdate}
-                >
-                    {loadingUpdate ? "Guardando..." : "Guardar cambios"}
-                </button>
-            </form>
+
+                <form onSubmit={handleSubmit} className="space-y-8">
+                    {/* Información sobre imagen de portada */}
+                    <ArticlePortadaInfo hasImage={!!article?.urlPortada} />
+
+                    {/* Información básica */}
+                    <div className="bg-white rounded-xl shadow-lg p-6">
+                        <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                            <FiFileText className="w-5 h-5 text-primary" />
+                            Información Básica
+                        </h2>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Título *
+                                </label>
+                                <input
+                                    type="text"
+                                    name="titulo"
+                                    value={form.titulo || ""}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                                    placeholder="Título del artículo"
+                                    required
+                                />
+                            </div>
+                            
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Slug *
+                                </label>
+                                <input
+                                    type="text"
+                                    name="slug"
+                                    value={form.slug || ""}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                                    placeholder="url-amigable-del-articulo"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="mt-6">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Resumen
+                            </label>
+                            <textarea
+                                name="resumen"
+                                value={form.resumen || ""}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                                rows={3}
+                                placeholder="Breve descripción del artículo..."
+                            />
+                        </div>
+
+                        <div className="mt-6">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Estado de publicación
+                            </label>
+                            <select
+                                name="estadoPublicacion"
+                                value={form.estadoPublicacion}
+                                onChange={handleChange}
+                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                            >
+                                {estados.map((op) => (
+                                    <option key={op.value} value={op.value}>{op.label}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+                    {/* Contenido */}
+                    <div className="bg-white rounded-xl shadow-lg p-6">
+                        <h2 className="text-xl font-semibold mb-4">Contenido del Artículo</h2>
+                        <CustomBlockEditor 
+                            value={editorContent} 
+                            onChange={(newContent) => {
+                                setEditorContent(newContent);
+                            }} 
+                        />
+                    </div>
+
+                    {/* Errores */}
+                    {errorUpdate && (
+                        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                            <p className="text-red-600">{errorUpdate}</p>
+                        </div>
+                    )}
+
+                    {/* Botones de acción */}
+                    <div className="flex gap-4 justify-end">
+                        <button
+                            type="button"
+                            onClick={() => navigate("/admin/articulos")}
+                            className="px-6 py-3 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            type="submit"
+                            className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+                            disabled={loadingUpdate}
+                        >
+                            {loadingUpdate ? (
+                                <>
+                                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                    Guardando...
+                                </>
+                            ) : (
+                                <>
+                                    <FiSave className="w-4 h-4" />
+                                    Guardar Cambios
+                                </>
+                            )}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };

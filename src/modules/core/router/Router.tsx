@@ -24,6 +24,7 @@ import ProductDetailPage from '@/modules/clients/pages/ProductDetailPage';
 import ArticlesPage from "@/modules/admin/pages/articles/ArticlesPage.tsx";
 import CreateArticlePage from "@/modules/admin/pages/articles/CreateArticlePage.tsx";
 import EditArticlePage from "@/modules/admin/pages/articles/EditArticlePage.tsx";
+import ArticlePreviewPage from "@/modules/admin/pages/articles/ArticlePreviewPage.tsx";
 
 const router = createBrowserRouter([ 
     {
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
             {
                 path: "admin/articulos",
                 element: <ArticlesPage />,
+            },
+            {
+                path: "admin/articulos/:id/vista-previa",
+                element: <ArticlePreviewPage />,
             },
             {
                 path: "admin/articulos/:id/editar",

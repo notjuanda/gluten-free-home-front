@@ -4,4 +4,5 @@ export interface ArticlesListProps {
   articles: Article[];
   loading?: boolean;
   error?: string | null;
+  refetch?: () => void;
 } 
