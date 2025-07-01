@@ -1,11 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { FiUpload, FiX, FiImage } from 'react-icons/fi';
-
-interface ArticlePortadaUploadProps {
-    currentImageUrl?: string;
-    onImageUpload: (file: File, textoAlt?: string) => Promise<void>;
-    loading?: boolean;
-}
+import { FiX, FiImage } from 'react-icons/fi';
+import type { ArticlePortadaUploadProps } from '../../types/articles-components.type';
 
 const ArticlePortadaUpload: React.FC<ArticlePortadaUploadProps> = ({
     currentImageUrl,

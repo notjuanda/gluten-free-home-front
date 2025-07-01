@@ -1,14 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { FiX, FiImage, FiUpload } from 'react-icons/fi';
 import { uploadArticlePortada } from "@/modules/core/api/articles.api";
-
-interface ArticlePortadaModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    articleId: number;
-    currentImageUrl?: string;
-    onSuccess?: () => void;
-}
+import type { ArticlePortadaModalProps } from '../../types/articles-components.type';
 
 const ArticlePortadaModal: React.FC<ArticlePortadaModalProps> = ({
     isOpen,

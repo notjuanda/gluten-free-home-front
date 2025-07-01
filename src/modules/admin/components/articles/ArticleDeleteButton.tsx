@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { useDeleteArticle } from '../../hooks/articles/useDeleteArticle';
-
-interface ArticleDeleteButtonProps {
-    id: number;
-    title: string;
-    onDeleted: () => void;
-}
+import type { ArticleDeleteButtonProps } from '../../types/articles-components.type';
 
 export default function ArticleDeleteButton({ id, title, onDeleted }: ArticleDeleteButtonProps) {
     const [isOpen, setIsOpen] = useState(false);

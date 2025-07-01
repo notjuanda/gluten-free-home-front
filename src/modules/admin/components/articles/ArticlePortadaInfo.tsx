@@ -1,9 +1,6 @@
 import React from 'react';
 import { FiInfo, FiImage, FiCheckCircle } from 'react-icons/fi';
-
-interface ArticlePortadaInfoProps {
-    hasImage: boolean;
-}
+import type { ArticlePortadaInfoProps } from '../../types/articles-components.type';
 
 const ArticlePortadaInfo: React.FC<ArticlePortadaInfoProps> = ({ hasImage }) => {
     if (hasImage) {

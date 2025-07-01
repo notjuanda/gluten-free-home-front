@@ -23,7 +23,7 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
                     <img
                         src={
                             item.product.imagenes?.[0]?.urlImagen ??
-                            '/logo-gluten-free-home.png'
+                            '/optimized/logo-gluten-free-home.webp'
                         }
                         alt={item.product.nombre}
                         className="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-lg bg-muted"

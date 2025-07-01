@@ -1,8 +1,5 @@
 import type { ArticleBlock } from '../types/article.type';
 import type { EditorBlock, BlockType, TextSegment } from '../types/editor-block.type';
-
-const API_URL = import.meta.env.VITE_API_BASE_URL;
-
 // Convertir bloques del backend a bloques del editor
 export function backendBlocksToEditorBlocks(backendBlocks: ArticleBlock[]): EditorBlock[] {
     return backendBlocks.map((block, index) => {

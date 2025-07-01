@@ -42,7 +42,7 @@ export default function AssignRolesModal({
             <DialogTitle className="font-cap-heading-2">
             Asignar roles — {user.nombreUsuario}
             </DialogTitle>
-            <IconButton onClick={onClose} className="text-foreground">
+            <IconButton onClick={onClose} className="text-foreground" aria-label="Cerrar modal">
             <X size={18} />
             </IconButton>
         </div>

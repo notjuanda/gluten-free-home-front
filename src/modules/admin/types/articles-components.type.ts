@@ -1,4 +1,4 @@
-import type { Article } from "@/modules/core/types/article.type";
+import type { Article, ArticleBlock } from "@/modules/core/types/article.type";
 
 export interface ArticlesListProps {
   articles: Article[];
@@ -6,3 +6,40 @@ export interface ArticlesListProps {
   error?: string | null;
   refetch?: () => void;
 } 
+
+export interface ArticlePortadaUploadProps {
+  currentImageUrl?: string;
+  onImageUpload: (file: File, textoAlt?: string) => Promise<void>;
+  loading?: boolean;
+}
+
+export interface ArticleContentRendererProps {
+  content: string; // HTML generado por Draft.js
+  className?: string;
+}
+
+export interface ArticleDeleteButtonProps {
+  id: number;
+  title: string;
+  onDeleted: () => void;
+}
+export interface ArticlePortadaInfoProps {
+    hasImage: boolean;
+}
+
+export interface ArticlePortadaModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  articleId: number;
+  currentImageUrl?: string;
+  onSuccess?: () => void;
+}
+
+export interface ArticlePreviewRendererProps {
+  blocks: ArticleBlock[];
+}
+
+export interface CustomBlockEditorProps {
+  value?: ArticleBlock[];
+  onChange?: (blocks: ArticleBlock[]) => void;
+}

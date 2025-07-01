@@ -7,7 +7,7 @@ const RegisterPage = () => {
         <div className="flex min-h-screen bg-background">
         <div className="hidden basis-[50%] items-center justify-center bg-primary md:flex">
             <img
-            src="/logo-gluten-free-home.png"
+            src="/optimized/logo-gluten-free-home.webp"
             alt="Gluten-Free Home"
             className="h-72 w-72 rounded-full object-contain"
             />

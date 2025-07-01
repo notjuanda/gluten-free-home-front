@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { FiBold, FiItalic, FiUnderline, FiLink, FiImage, FiType, FiList, FiMessageSquare, FiCode, FiPlus, FiTrash2, FiChevronUp, FiChevronDown } from 'react-icons/fi';
+import { FiLink, FiImage, FiType, FiList, FiMessageSquare, FiCode, FiPlus, FiTrash2, FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import { uploadBlockImage } from '@/modules/core/api/articles.api';
 import { backendBlocksToEditorBlocks, editorBlocksToBackendBlocks, generateBlockId } from '@/modules/core/utils/block-converter';
 import type { EditorBlock, BlockType, TextSegment, TextFormat } from '@/modules/core/types/editor-block.type';
-import type { ArticleBlock } from '@/modules/core/types/article.type';
+import type { CustomBlockEditorProps } from '../../types/articles-components.type';
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
-
-interface CustomBlockEditorProps {
-    value?: ArticleBlock[];
-    onChange?: (blocks: ArticleBlock[]) => void;
-}
 
 const CustomBlockEditor: React.FC<CustomBlockEditorProps> = ({ value = [], onChange }) => {
     const [blocks, setBlocks] = useState<EditorBlock[]>([]);
@@ -21,9 +16,7 @@ const CustomBlockEditor: React.FC<CustomBlockEditorProps> = ({ value = [], onCha
     const [imageCaption, setImageCaption] = useState('');
     const [uploadingImage, setUploadingImage] = useState(false);
     const [showLinkModal, setShowLinkModal] = useState(false);
-    const [linkUrl, setLinkUrl] = useState('');
-    const [selectedText, setSelectedText] = useState({ start: 0, end: 0 });
-    
+    const [linkUrl, setLinkUrl] = useState('');    
     // Bandera para evitar sincronización cruzada
     const [isUpdatingFromValue, setIsUpdatingFromValue] = useState(false);
     
@@ -35,40 +28,38 @@ const CustomBlockEditor: React.FC<CustomBlockEditorProps> = ({ value = [], onCha
     useEffect(() => {
         if (isUpdatingFromValue) return; // Evitar sincronización cruzada
         
-        // Solo actualiza si el value es diferente a blocks
         if (value && value.length > 0) {
-        const editorBlocks = backendBlocksToEditorBlocks(value);
-        if (JSON.stringify(editorBlocks) !== JSON.stringify(blocks)) {
+            const editorBlocks = backendBlocksToEditorBlocks(value);
+            if (JSON.stringify(editorBlocks) !== JSON.stringify(blocks)) {
+                setIsUpdatingFromValue(true);
+                setBlocks(editorBlocks);
+                setTimeout(() => setIsUpdatingFromValue(false), 0);
+            }
+        } else if (blocks.length === 0) {
             setIsUpdatingFromValue(true);
-            setBlocks(editorBlocks);
-            // Resetear la bandera después de un tick
+            setBlocks([{
+                id: generateBlockId(),
+                type: 'paragraph',
+                content: [{ text: '', format: {} }],
+                order: 1
+            }]);
             setTimeout(() => setIsUpdatingFromValue(false), 0);
         }
-        } else if (blocks.length === 0) {
-        setIsUpdatingFromValue(true);
-        setBlocks([{
-            id: generateBlockId(),
-            type: 'paragraph',
-            content: [{ text: '', format: {} }],
-            order: 1
-        }]);
-        setTimeout(() => setIsUpdatingFromValue(false), 0);
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [value]);
+    }, [JSON.stringify(value)]);
 
     // Notificar cambios al padre
     useEffect(() => {
         if (isUpdatingFromValue) return; // Evitar sincronización cruzada
         
         if (blocks.length > 0) {
-        const backendBlocks = editorBlocksToBackendBlocks(blocks);
-        if (JSON.stringify(backendBlocks) !== JSON.stringify(value)) {
-            onChange?.(backendBlocks);
-        }
+            const backendBlocks = editorBlocksToBackendBlocks(blocks);
+            if (JSON.stringify(backendBlocks) !== JSON.stringify(value)) {
+                onChange?.(backendBlocks);
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [blocks]);
+    }, [JSON.stringify(blocks)]);
 
     // Enfocar el nuevo bloque al agregar
     useEffect(() => {

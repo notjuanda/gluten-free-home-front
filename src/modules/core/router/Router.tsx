@@ -25,6 +25,7 @@ import ArticlesPage from "@/modules/admin/pages/articles/ArticlesPage.tsx";
 import CreateArticlePage from "@/modules/admin/pages/articles/CreateArticlePage.tsx";
 import EditArticlePage from "@/modules/admin/pages/articles/EditArticlePage.tsx";
 import ArticlePreviewPage from "@/modules/admin/pages/articles/ArticlePreviewPage.tsx";
+import CategoriasBlogPage from "@/modules/admin/pages/categorias-blog/CategoriasBlogPage.tsx";
 
 const router = createBrowserRouter([ 
     {
@@ -109,6 +110,10 @@ const router = createBrowserRouter([
             {
                 path: "admin/articulos/crear",
                 element: <CreateArticlePage />,
+            },
+            {
+                path: "admin/categorias-blog",
+                element: <CategoriasBlogPage />,
             },
             {
                 path: "explorar",

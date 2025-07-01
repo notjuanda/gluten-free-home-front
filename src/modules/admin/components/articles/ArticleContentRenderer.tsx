@@ -1,9 +1,5 @@
 import React from 'react';
-
-interface ArticleContentRendererProps {
-    content: string; // HTML generado por Draft.js
-    className?: string;
-}
+import type { ArticleContentRendererProps } from '../../types/articles-components.type';
 
 const ArticleContentRenderer: React.FC<ArticleContentRendererProps> = ({ content, className }) => {
     return (

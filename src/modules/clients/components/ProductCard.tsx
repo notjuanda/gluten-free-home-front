@@ -29,7 +29,7 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => 
     }
 
     const hasImages = images && images.length > 0;
-    const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/logo-gluten-free-home.png';
+    const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/optimized/logo-gluten-free-home.webp';
 
     return (
         <div className="bg-client text-client-foreground p-3 sm:p-4 flex flex-col items-center min-h-[280px] sm:min-h-[300px] lg:min-h-[320px] rounded-xl sm:rounded-2xl transition-all duration-200 hover:scale-[1.02] sm:hover:scale-[1.03] hover:shadow-lg cursor-pointer" onClick={handleCardClick}>

@@ -40,7 +40,7 @@ export const BaseHeader: FC<Props> = ({ links, user, logout, showSearch }) => {
             <div className="flex items-center gap-4">
                 <Link to="/" className="shrink-0">
                     <img
-                        src="/logo-gluten-free-home.png"
+                        src="/optimized/logo-gluten-free-home.webp"
                         alt="Gluten-Free Home"
                         className="h-12 w-12 rounded-full"
                     />

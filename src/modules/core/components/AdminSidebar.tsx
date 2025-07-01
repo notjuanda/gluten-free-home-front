@@ -59,7 +59,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ user, logout, children }) =
             >
                 <Menu size={28} />
             </button>
-            <img src="/logo-gluten-free-home.png" alt="Logo" className="h-10 w-10 rounded-full mr-3" />
+            <img src="/optimized/logo-gluten-free-home.webp" alt="Logo" className="h-10 w-10 rounded-full mr-3" />
             <span className="font-cap-logo text-lg font-bold text-primary-foreground">Admin</span>
         </div>
     );
@@ -72,7 +72,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ user, logout, children }) =
             {/* Sidebar desktop */}
             <div className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:left-0 md:z-40 md:w-56 md:bg-primary md:text-primary-foreground md:py-6 md:px-4">
                 <div className="flex items-center gap-3 mb-8">
-                    <img src="/logo-gluten-free-home.png" alt="Logo" className="h-12 w-12 rounded-full" />
+                    <img src="/optimized/logo-gluten-free-home.webp" alt="Logo" className="h-12 w-12 rounded-full" />
                     <span className="font-cap-logo text-lg font-bold">Admin</span>
                 </div>
                 {sidebarContent}
@@ -97,7 +97,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ user, logout, children }) =
                     <div className="relative w-64 max-w-[90vw] h-full bg-primary text-primary-foreground flex flex-col py-6 px-4 animate-slide-in-left">
                         <div className="flex items-center justify-between mb-8">
                             <div className="flex items-center gap-3">
-                                <img src="/logo-gluten-free-home.png" alt="Logo" className="h-10 w-10 rounded-full" />
+                                <img src="/optimized/logo-gluten-free-home.webp" alt="Logo" className="h-10 w-10 rounded-full" />
                                 <span className="font-cap-logo text-lg font-bold">Admin</span>
                             </div>
                             <button

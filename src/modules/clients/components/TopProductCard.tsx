@@ -18,7 +18,7 @@ const TopProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart })
         setCurrentIndex(prev => (prev === images.length - 1 ? 0 : prev + 1));
     };
 
-    const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/logo-gluten-free-home.png';
+    const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/optimized/logo-gluten-free-home.webp';
 
     return (
         <div className="w-full sm:w-32 md:w-36 lg:w-40 xl:w-44 sm:flex-shrink-0 group p-2 flex flex-col items-center">

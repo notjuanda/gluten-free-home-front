@@ -3,7 +3,7 @@ import type { ProductDetailProps } from '../types/products-components.type';
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product, onAddToCart }) => {
     const { images } = useProductImages(product.id);
-    const mainImageSrc = images && images.length > 0 ? images[0].urlImagen : '/logo-gluten-free-home.png';
+    const mainImageSrc = images && images.length > 0 ? images[0].urlImagen : '/optimized/logo-gluten-free-home.webp';
 
     return (
         <div className="w-full max-w-4xl mx-auto bg-background text-foreground rounded-2xl shadow-xl p-6 flex flex-col md:flex-row gap-8 border border-border animate-fade-in">

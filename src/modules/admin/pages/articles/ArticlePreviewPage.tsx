@@ -2,7 +2,7 @@ import React from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useGetArticle } from "@/modules/admin/hooks/articles/useGetArticle";
 import ArticlePreviewRenderer from "@/modules/admin/components/articles/ArticlePreviewRenderer";
-import { FiArrowLeft, FiEdit2, FiEye, FiCalendar, FiUser, FiClock, FiTag } from "react-icons/fi";
+import { FiArrowLeft, FiEdit2, FiCalendar, FiUser } from "react-icons/fi";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 

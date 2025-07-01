@@ -1,9 +1,5 @@
 import React from 'react';
-import type { ArticleBlock } from '@/modules/core/types/article.type';
-
-interface ArticlePreviewRendererProps {
-    blocks: ArticleBlock[];
-}
+import type { ArticlePreviewRendererProps } from '../../types/articles-components.type';
 
 // Función auxiliar para renderizar contenido de texto o arrays de texto
 const renderContent = (content: any): string => {

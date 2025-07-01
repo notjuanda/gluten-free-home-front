@@ -142,39 +142,39 @@ const CreateArticlePage: React.FC = () => {
                         </h2>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
+                <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                     Título *
                                 </label>
-                                <input
-                                    type="text"
-                                    name="titulo"
-                                    value={form.titulo}
-                                    onChange={handleChange}
+                    <input
+                        type="text"
+                        name="titulo"
+                        value={form.titulo}
+                        onChange={handleChange}
                                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                                     placeholder="Título del artículo"
-                                    required
-                                />
-                            </div>
+                        required
+                    />
+                </div>
                             
-                            <div>
+                <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
                                     Slug *
                                 </label>
                                 <div className="relative">
-                                    <input
-                                        type="text"
-                                        name="slug"
-                                        value={form.slug}
-                                        onChange={handleChange}
+                    <input
+                        type="text"
+                        name="slug"
+                        value={form.slug}
+                        onChange={handleChange}
                                         className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary pr-10 ${
                                             slugValidation.isValid 
                                                 ? 'border-gray-300 focus:border-primary' 
                                                 : 'border-red-300 focus:border-red-500'
                                         }`}
                                         placeholder="url-amigable-del-articulo"
-                                        required
-                                    />
+                        required
+                    />
                                     {form.slug && (
                                         <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
                                             {slugValidation.isValid ? (
@@ -193,37 +193,37 @@ const CreateArticlePage: React.FC = () => {
                                     </p>
                                 )}
                             </div>
-                        </div>
+                </div>
 
                         <div className="mt-6">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                                 Resumen
                             </label>
-                            <textarea
-                                name="resumen"
-                                value={form.resumen}
-                                onChange={handleChange}
+                    <textarea
+                        name="resumen"
+                        value={form.resumen}
+                        onChange={handleChange}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                                 rows={3}
                                 placeholder="Breve descripción del artículo..."
-                            />
-                        </div>
+                    />
+                </div>
 
                         <div className="mt-6">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                                 Estado de publicación
                             </label>
-                            <select
-                                name="estadoPublicacion"
-                                value={form.estadoPublicacion}
-                                onChange={handleChange}
+                    <select
+                        name="estadoPublicacion"
+                        value={form.estadoPublicacion}
+                        onChange={handleChange}
                                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
-                            >
-                                {estados.map((op) => (
-                                    <option key={op.value} value={op.value}>{op.label}</option>
-                                ))}
-                            </select>
-                        </div>
+                    >
+                        {estados.map((op) => (
+                            <option key={op.value} value={op.value}>{op.label}</option>
+                        ))}
+                    </select>
+                </div>
                     </div>
 
                     {/* Contenido */}
@@ -334,7 +334,7 @@ const CreateArticlePage: React.FC = () => {
                                     )}
                                 </div>
                             </div>
-                        </div>
+                </div>
                     )}
 
                     {/* Botones de acción */}
@@ -346,8 +346,8 @@ const CreateArticlePage: React.FC = () => {
                         >
                             Cancelar
                         </button>
-                        <button
-                            type="submit"
+                <button
+                    type="submit"
                             className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
                             disabled={loading || !slugValidation.isValid}
                         >
@@ -362,9 +362,9 @@ const CreateArticlePage: React.FC = () => {
                                     Crear Artículo
                                 </>
                             )}
-                        </button>
+                </button>
                     </div>
-                </form>
+            </form>
             </div>
         </div>
     );

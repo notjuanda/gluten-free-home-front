@@ -111,7 +111,7 @@ export function FormModal({
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
             <div className="flex items-center justify-between pr-3 pt-2">
                 <DialogTitle className="font-cap-heading-2">{title}</DialogTitle>
-                <IconButton onClick={onClose} className="text-foreground">
+                <IconButton onClick={onClose} className="text-foreground" aria-label="Cerrar modal">
                     <X size={20} />
                 </IconButton>
             </div>
