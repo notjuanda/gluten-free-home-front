@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useGetArticle } from "@/modules/admin/hooks/articles/useGetArticle";
 import ArticlePreviewRenderer from "@/modules/admin/components/articles/ArticlePreviewRenderer";
-import { FiArrowLeft, FiEdit2, FiCalendar, FiUser } from "react-icons/fi";
+import { ChangeArticleStatusModal } from "@/modules/admin/components/articles/ChangeArticleStatusModal";
+import { PublicationStatus } from "@/modules/core/enums/publication-status.enum";
+import { FiArrowLeft, FiEdit2, FiCalendar, FiUser, FiRefreshCw } from "react-icons/fi";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 const ArticlePreviewPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const { article, loading, error } = useGetArticle(Number(id));
+    const { article, loading, error, refetch } = useGetArticle(Number(id));
+    const [modalOpen, setModalOpen] = useState(false);
+    const [localStatus, setLocalStatus] = useState<string | null>(null);
 
     const getStatusColor = (status: string) => {
         switch (status) {
@@ -37,28 +41,39 @@ const ArticlePreviewPage: React.FC = () => {
         }
     };
 
-    if (loading) return (
-        <div className="min-h-screen bg-white flex items-center justify-center">
-            <div className="text-center">
-                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                <p className="text-gray-600">Cargando vista previa...</p>
+    const handleStatusChanged = (newStatus: string) => {
+        setLocalStatus(newStatus);
+        if (refetch) refetch();
+    };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-white flex items-center justify-center">
+                <div className="text-center">
+                    <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <p className="text-gray-600">Cargando vista previa...</p>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
     
-    if (error || !article) return (
-        <div className="min-h-screen bg-white flex items-center justify-center">
-            <div className="text-center text-red-600">
-                <p className="font-semibold">{error || "Artículo no encontrado"}</p>
-                <button
-                    onClick={() => navigate("/admin/articulos")}
-                    className="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark"
-                >
-                    Volver a la lista
-                </button>
+    if (error || !article) {
+        return (
+            <div className="min-h-screen bg-white flex items-center justify-center">
+                <div className="text-center text-red-600">
+                    <p className="font-semibold">{error || "Artículo no encontrado"}</p>
+                    <button
+                        onClick={() => navigate("/admin/articulos")}
+                        className="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark"
+                    >
+                        Volver a la lista
+                    </button>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+
+    const currentStatus = (localStatus || article.estadoPublicacion) as PublicationStatus;
 
     return (
         <div className="min-h-screen bg-white">
@@ -76,9 +91,19 @@ const ArticlePreviewPage: React.FC = () => {
                         <div className="h-6 w-px bg-gray-300"></div>
                         <span className="text-sm text-gray-500">Vista previa</span>
                     </div>
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(article.estadoPublicacion)}`}>
-                        {getStatusLabel(article.estadoPublicacion)}
-                    </span>
+                    <div className="flex items-center gap-2">
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(currentStatus)}`}>
+                            {getStatusLabel(currentStatus)}
+                        </span>
+                        <button
+                            className="ml-2 px-2 py-1 text-xs rounded bg-gray-200 hover:bg-gray-300 text-gray-700 flex items-center gap-1"
+                            onClick={() => setModalOpen(true)}
+                            title="Cambiar estado"
+                        >
+                            <FiRefreshCw className="w-4 h-4" />
+                            Cambiar estado
+                        </button>
+                    </div>
                     <Link
                         to={`/admin/articulos/${article.id}/editar`}
                         className="px-3 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors flex items-center gap-2"
@@ -142,6 +167,15 @@ const ArticlePreviewPage: React.FC = () => {
                     <ArticlePreviewRenderer blocks={article.contenidoBloques || []} />
                 </article>
             </main>
+
+            {/* Modal para cambiar estado */}
+            <ChangeArticleStatusModal
+                articleId={article.id}
+                currentStatus={currentStatus}
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                onStatusChanged={handleStatusChanged}
+            />
 
             {/* Indicador de vista previa */}
             <div className="fixed bottom-6 right-6 bg-yellow-500 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium">

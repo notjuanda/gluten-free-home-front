@@ -14,7 +14,6 @@ export interface ArticlePortadaUploadProps {
 }
 
 export interface ArticleContentRendererProps {
-  content: string; // HTML generado por Draft.js
   className?: string;
 }
 
@@ -37,9 +36,4 @@ export interface ArticlePortadaModalProps {
 
 export interface ArticlePreviewRendererProps {
   blocks: ArticleBlock[];
-}
-
-export interface CustomBlockEditorProps {
-  value?: ArticleBlock[];
-  onChange?: (blocks: ArticleBlock[]) => void;
 }

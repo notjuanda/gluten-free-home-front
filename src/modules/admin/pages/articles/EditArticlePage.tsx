@@ -4,7 +4,7 @@ import type { UpdateArticleInput, ArticleBlock } from "@/modules/core/types/arti
 import { PublicationStatus } from "@/modules/core/enums/publication-status.enum";
 import { useGetArticle } from "@/modules/admin/hooks/articles/useGetArticle";
 import { useUpdateArticle } from "@/modules/admin/hooks/articles/useUpdateArticle";
-import CustomBlockEditor from "@/modules/admin/components/articles/CustomBlockEditor";
+import TipTapEditor from "@/modules/admin/components/articles/TipTapEditor";
 import ArticlePortadaInfo from "@/modules/admin/components/articles/ArticlePortadaInfo";
 import { FiArrowLeft, FiSave, FiFileText } from "react-icons/fi";
 
@@ -68,28 +68,32 @@ const EditArticlePage: React.FC = () => {
         }
     };
 
-    if (loadingArticle) return (
-        <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center">
-            <div className="text-center">
-                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-                <p className="text-gray-600">Cargando artículo...</p>
+    if (loadingArticle) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <p className="text-gray-600">Cargando artículo...</p>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
     
-    if (errorArticle) return (
-        <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center">
-            <div className="text-center text-red-600">
-                <p className="font-semibold">{errorArticle}</p>
-                <button
-                    onClick={() => navigate("/admin/articulos")}
-                    className="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark"
-                >
-                    Volver a la lista
-                </button>
+    if (errorArticle) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10 flex items-center justify-center">
+                <div className="text-center text-red-600">
+                    <p className="font-semibold">{errorArticle}</p>
+                    <button
+                        onClick={() => navigate("/admin/articulos")}
+                        className="mt-4 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark"
+                    >
+                        Volver a la lista
+                    </button>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/10">
@@ -185,7 +189,7 @@ const EditArticlePage: React.FC = () => {
                     {/* Contenido */}
                     <div className="bg-white rounded-xl shadow-lg p-6">
                         <h2 className="text-xl font-semibold mb-4">Contenido del Artículo</h2>
-                        <CustomBlockEditor 
+                        <TipTapEditor 
                             value={editorContent} 
                             onChange={(newContent) => {
                                 setEditorContent(newContent);
@@ -200,19 +204,19 @@ const EditArticlePage: React.FC = () => {
                         </div>
                     )}
 
-                    {/* Botones de acción */}
-                    <div className="flex gap-4 justify-end">
+                    {/* Botones */}
+                    <div className="flex gap-4">
                         <button
                             type="button"
                             onClick={() => navigate("/admin/articulos")}
-                            className="px-6 py-3 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                            className="px-6 py-3 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50"
                         >
                             Cancelar
                         </button>
                         <button
                             type="submit"
-                            className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
                             disabled={loadingUpdate}
+                            className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark disabled:opacity-50"
                         >
                             {loadingUpdate ? (
                                 <>
