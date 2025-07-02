@@ -7,7 +7,7 @@ interface Props {
 }
 
 const BlogCommentForm: React.FC<Props> = ({ articleId }) => {
-    const { user, isAuthenticated } = useAuth();
+    const { isAuthenticated } = useAuth();
     const { createComment, loading, error, success } = useCreateComment(articleId);
     const [contenido, setContenido] = useState('');
 

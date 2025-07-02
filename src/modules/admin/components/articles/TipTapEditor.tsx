@@ -43,7 +43,7 @@ const extractTextFromContent = (content: any[]): string => {
 
 // Función para convertir bloques del backend al formato de TipTap
 const convertBackendToTipTapFormat = (backendBlocks: any[]): any => {
-    const content = backendBlocks.map((block, index) => {
+    const content = backendBlocks.map((block) => {
         const { type, data } = block;
         
         switch (type) {
@@ -389,7 +389,6 @@ const TipTapEditor: React.FC<TipTapEditorProps> = ({ value, onChange }) => {
 
     // Estado para el bloque seleccionado
     const [selectedBlockPos, setSelectedBlockPos] = useState<number | null>(null);
-    const [showBlockControls, setShowBlockControls] = useState(false);
 
     const [currentValue, setCurrentValue] = useState<any>(() => {
         if (value && Array.isArray(value) && value.length > 0) {
@@ -616,37 +615,6 @@ const TipTapEditor: React.FC<TipTapEditorProps> = ({ value, onChange }) => {
         }, 10);
     };
 
-    // Función para cambiar el tipo de bloque actual
-    const changeBlockType = (type: string, attrs: any = {}) => {
-        if (!editor || selectedBlockPos === null) return;
-        
-        const { state } = editor;
-        const node = state.doc.nodeAt(selectedBlockPos);
-        if (!node) return;
-
-        // Enfocar el bloque seleccionado primero
-        editor.chain().focus().setNodeSelection(selectedBlockPos).run();
-
-        if (type === 'paragraph') {
-            editor.chain().focus().setNode('paragraph').run();
-        } else if (type.startsWith('heading')) {
-            const level = parseInt(type.replace('heading', ''));
-            editor.chain().focus().setNode('heading', { level }).run();
-        } else if (type === 'bulletList') {
-            // Para listas, necesitamos envolver el contenido en bulletList y listItem
-            editor.chain().focus().wrapIn('bulletList').run();
-        } else if (type === 'blockquote') {
-            editor.chain().focus().wrapIn('blockquote').run();
-        } else if (type === 'codeBlock') {
-            editor.chain().focus().setNode('codeBlock').run();
-        }
-        
-        // Enfocar el editor después del cambio
-        setTimeout(() => {
-            editor.commands.focus();
-        }, 10);
-    };
-
     // Función para mover bloque arriba
     const moveBlockUp = () => {
         if (!editor || selectedBlockPos === null) return;
@@ -707,13 +675,6 @@ const TipTapEditor: React.FC<TipTapEditorProps> = ({ value, onChange }) => {
         if (state.doc.childCount > 1) {
             editor.chain().focus().setNodeSelection(selectedBlockPos).deleteSelection().run();
         }
-    };
-
-    // Obtener el tipo de bloque actual
-    const getCurrentBlockType = () => {
-        if (!editor || selectedBlockPos === null) return 'paragraph';
-        const node = editor.state.doc.nodeAt(selectedBlockPos);
-        return node?.type.name || 'paragraph';
     };
 
     // Inyectar estilos CSS para el editor
@@ -1032,9 +993,9 @@ const TipTapEditor: React.FC<TipTapEditorProps> = ({ value, onChange }) => {
                         {/* Opciones de tipo de bloque */}
                         <button 
                             type="button" 
-                            onClick={() => changeBlockType('paragraph')} 
                             className="p-1.5 bg-white border border-gray-200 rounded-lg hover:bg-primary/10 hover:scale-110 transition-all" 
                             title="Párrafo"
+                            disabled
                         >
                             <FiType className="w-4 h-4" />
                         </button>
@@ -1042,38 +1003,38 @@ const TipTapEditor: React.FC<TipTapEditorProps> = ({ value, onChange }) => {
                             <button 
                                 key={level} 
                                 type="button" 
-                                onClick={() => changeBlockType(`heading${level}`, { level })} 
                                 className="p-1.5 bg-white border border-gray-200 rounded-lg hover:bg-primary/10 hover:scale-110 transition-all" 
                                 title={`Encabezado H${level}`}
                                 style={{ 
                                     fontSize: `${Math.max(0.7, 1.2 - level * 0.08)}em`,
                                     fontWeight: level <= 3 ? '600' : '500'
                                 }}
+                                disabled
                             >
                                 T{level}
                             </button>
                         ))}
                         <button 
                             type="button" 
-                            onClick={() => changeBlockType('bulletList')} 
                             className="p-1.5 bg-white border border-gray-200 rounded-lg hover:bg-primary/10 hover:scale-110 transition-all" 
                             title="Lista"
+                            disabled
                         >
                             <FiList className="w-4 h-4" />
                         </button>
                         <button 
                             type="button" 
-                            onClick={() => changeBlockType('blockquote')} 
                             className="p-1.5 bg-white border border-gray-200 rounded-lg hover:bg-primary/10 hover:scale-110 transition-all" 
                             title="Cita"
+                            disabled
                         >
                             <FiMessageSquare className="w-4 h-4" />
                         </button>
                         <button 
                             type="button" 
-                            onClick={() => changeBlockType('codeBlock')} 
                             className="p-1.5 bg-white border border-gray-200 rounded-lg hover:bg-primary/10 hover:scale-110 transition-all" 
                             title="Código"
+                            disabled
                         >
                             <FiCode className="w-4 h-4" />
                         </button>

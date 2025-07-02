@@ -16,7 +16,7 @@ const convertBackendToTipTapFormat = (backendBlocks: any[]): any => {
         };
     }
 
-    const content = backendBlocks.map((block, index) => {
+    const content = backendBlocks.map((block) => {
         const { type, data } = block;
         
         switch (type) {
