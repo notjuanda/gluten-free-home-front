@@ -92,7 +92,7 @@ export function FormModal({
                             {...registerProps}
                             className="block w-full text-sm text-muted file:mr-4 file:py-2 file:px-4
                                 file:rounded file:border-0 file:text-sm file:font-semibold
-                                file:bg-highlight file:text-black hover:file:bg-highlight/80"
+                                file:bg-secondary file:text-secondary-foreground hover:file:bg-secondary/80"
                         />
                         {fieldErrors?.[field.name] && (
                             <p className="mt-1 text-sm text-red-500">
@@ -111,7 +111,7 @@ export function FormModal({
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
             <div className="flex items-center justify-between pr-3 pt-2">
                 <DialogTitle className="font-cap-heading-2">{title}</DialogTitle>
-                <IconButton onClick={onClose} className="text-foreground">
+                <IconButton onClick={onClose} className="text-foreground" aria-label="Cerrar modal">
                     <X size={20} />
                 </IconButton>
             </div>

@@ -3,6 +3,7 @@ import type {
     Payment,
     CreatePaymentInput,
     UpdatePaymentInput,
+    CreateCheckoutSessionInput,
 } from '../types/payment.type';
 
 export const getPayments = async (): Promise<Payment[]> =>
@@ -28,3 +29,9 @@ export const deletePayment = async (id: number): Promise<void> => {
 
 export const confirmPayment = async (id: number): Promise<Payment> =>
     (await api.patch<Payment>(`/payments/${id}/confirmar`)).data;
+
+// Stripe checkout session
+export const createStripeCheckoutSession = async (
+    payload: CreateCheckoutSessionInput,
+): Promise<{ url: string }> =>
+    (await api.post<{ url: string }>('/payments/stripe/create-checkout-session', payload)).data;

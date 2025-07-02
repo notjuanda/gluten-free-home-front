@@ -28,8 +28,19 @@ export const createOrder = async (
 export const updateOrder = async (
     id: number,
     payload: UpdateOrderInput,
-): Promise<Order> =>
-    (await api.patch<Order>(`/orders/${id}`, payload)).data;
+): Promise<Order> => {
+    console.log('Enviando actualización de orden:', { id, payload });
+    return (await api.patch<Order>(`/orders/${id}`, payload)).data;
+};
+
+export const updateOrderStatus = async (
+    id: number,
+    estado: string,
+): Promise<Order> => {
+    console.log('Enviando actualización de estado:', { id, estado });
+    // Usar el endpoint general con solo el estado
+    return (await api.patch<Order>(`/orders/${id}`, { estado })).data;
+};
 
 export const deleteOrder = async (id: number): Promise<void> => {
     await api.delete(`/orders/${id}`);
@@ -40,3 +51,6 @@ export const assignAddressToOrder = async (
     payload: AssignAddressInput,
 ): Promise<Order> =>
     (await api.patch<Order>(`/orders/${id}/direccion-envio`, payload)).data;
+
+export const getMyOrders = async (): Promise<Order[]> =>
+    (await api.get<Order[]>('/orders/me/orders')).data;

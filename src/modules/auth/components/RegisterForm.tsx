@@ -45,7 +45,7 @@ export function RegisterForm() {
             className="flex flex-col gap-6 text-foreground"
         >
             {serverError && (
-                <p className="rounded-md bg-destructive px-4 py-2 text-sm text-white shadow-sm">
+                <p className="rounded-md bg-destructive/10 px-4 py-2 text-sm text-destructive shadow-sm">
                     {serverError}
                 </p>
             )}
@@ -56,12 +56,12 @@ export function RegisterForm() {
                     type="text"
                     {...register('nombreUsuario')}
                     className={clsx(
-                        'w-full rounded-md bg-white px-4 py-2 text-black outline-none transition-shadow',
+                        'w-full rounded-md bg-input px-4 py-2 text-foreground outline-none transition-shadow',
                         errors.nombreUsuario && 'ring-2 ring-destructive'
                     )}
                 />
                 {errors.nombreUsuario && (
-                    <p className="mt-1 text-xs text-destructive-foreground">
+                    <p className="mt-1 text-xs text-destructive">
                         {errors.nombreUsuario.message}
                     </p>
                 )}
@@ -74,12 +74,12 @@ export function RegisterForm() {
                         type="text"
                         {...register('nombreCompleto')}
                         className={clsx(
-                            'w-full rounded-md bg-white px-4 py-2 text-black outline-none transition-shadow',
+                            'w-full rounded-md bg-input px-4 py-2 text-foreground outline-none transition-shadow',
                             errors.nombreCompleto && 'ring-2 ring-destructive'
                         )}
                     />
                     {errors.nombreCompleto && (
-                        <p className="mt-1 text-xs text-destructive-foreground">
+                        <p className="mt-1 text-xs text-destructive">
                             {errors.nombreCompleto.message}
                         </p>
                     )}
@@ -91,30 +91,33 @@ export function RegisterForm() {
                         type="text"
                         {...register('telefono')}
                         className={clsx(
-                            'w-full rounded-md bg-white px-4 py-2 text-black outline-none transition-shadow',
+                            'w-full rounded-md bg-input px-4 py-2 text-foreground outline-none transition-shadow',
                             errors.telefono && 'ring-2 ring-destructive'
                         )}
                     />
                     {errors.telefono && (
-                        <p className="mt-1 text-xs text-destructive-foreground">
+                        <p className="mt-1 text-xs text-destructive">
                             {errors.telefono.message}
                         </p>
                     )}
                 </div>
             </div>
 
-            <div>
-                <label className="mb-1 block text-sm">Correo Electrónico</label>
+            <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium" htmlFor="email">
+                    Correo electrónico
+                </label>
                 <input
+                    id="email"
                     type="email"
                     {...register('correo')}
                     className={clsx(
-                        'w-full rounded-md bg-white px-4 py-2 text-black outline-none transition-shadow',
+                        'w-full rounded-md bg-input px-4 py-2 text-foreground outline-none transition-shadow',
                         errors.correo && 'ring-2 ring-destructive'
                     )}
                 />
                 {errors.correo && (
-                    <p className="mt-1 text-xs text-destructive-foreground">
+                    <p className="mt-1 text-xs text-destructive">
                         {errors.correo.message}
                     </p>
                 )}
@@ -126,12 +129,12 @@ export function RegisterForm() {
                     type="password"
                     {...register('contraseña')}
                     className={clsx(
-                        'w-full rounded-md bg-white px-4 py-2 text-black outline-none transition-shadow',
+                        'w-full rounded-md bg-input px-4 py-2 text-foreground outline-none transition-shadow',
                         errors.contraseña && 'ring-2 ring-destructive'
                     )}
                 />
                 {errors.contraseña && (
-                    <p className="mt-1 text-xs text-destructive-foreground">
+                    <p className="mt-1 text-xs text-destructive">
                         {errors.contraseña.message}
                     </p>
                 )}
@@ -147,8 +150,8 @@ export function RegisterForm() {
             <button
                 type="submit"
                 disabled={submitting || isPending}
-                className="rounded-full bg-button text-white px-6 py-2 font-cap-medium uppercase tracking-wide
-                    transition-opacity hover:bg-button/90 disabled:cursor-not-allowed disabled:opacity-60"
+                className="rounded-full bg-secondary text-secondary-foreground px-6 py-2 font-cap-medium uppercase tracking-wide
+                    transition-opacity hover:bg-secondary/90 disabled:cursor-not-allowed disabled:opacity-60"
             >
                 {submitting ? 'Registrando…' : 'Registrar'}
             </button>

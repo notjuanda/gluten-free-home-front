@@ -13,6 +13,11 @@ export interface Payment {
     fechaPago: string;
     estado: PaymentStatus;
 
+    stripePaymentIntentId?: string;
+    stripeCustomerId?: string;
+    stripePaymentMethodId?: string;
+    stripeMetadata?: any;
+
     createdAt: string;
     updatedAt: string;
 }
@@ -27,3 +32,7 @@ export interface CreatePaymentInput {
 }
 
 export type UpdatePaymentInput = Partial<CreatePaymentInput>;
+
+export interface CreateCheckoutSessionInput {
+    pedidoId: number;
+}

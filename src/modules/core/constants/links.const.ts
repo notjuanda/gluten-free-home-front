@@ -9,14 +9,32 @@ export const guestLinks: LinkItem[] = [
 ];
 
 export const clientLinks: LinkItem[] = [
-    { to: '/', label: 'Inicio' },
     { to: '/blog', label: 'Blog' },
+    { to: '/explorar', label: 'Inicio' },
 ];
 
 export const adminLinks: LinkItem[] = [
-    { to: '/admin/dashboard',    label: 'Dashboard' },
-    { to: '/admin/usuarios',     label: 'Usuarios'  },
-    { to: '/admin/permisos',     label: 'Permisos'  },
+    // GENERAL
+    { to: '/admin/dashboard', label: 'Dashboard', group: 'GENERAL' },
+
+    // USUARIOS Y PERMISOS
+    { to: '/admin/usuarios', label: 'Usuarios', group: 'USUARIOS Y PERMISOS' },
+    { to: '/admin/roles', label: 'Roles y permisos', group: 'USUARIOS Y PERMISOS' },
+
+    // PRODUCTOS
+    { to: '/admin/productos', label: 'Productos', group: 'PRODUCTOS' },
+    { to: '/admin/categorias-producto', label: 'Categorías de producto', group: 'PRODUCTOS' },
+    { to: '/admin/marcas', label: 'Marcas', group: 'PRODUCTOS' },
+    { to: '/admin/ingredientes', label: 'Ingredientes', group: 'PRODUCTOS' },
+
+    // ÓRDENES Y PAGOS
+    { to: '/admin/ordenes', label: 'Órdenes', group: 'ÓRDENES Y PAGOS' },
+    { to: '/admin/pagos', label: 'Pagos', group: 'ÓRDENES Y PAGOS' },
+
+    // CONTENIDO
+    { to: '/admin/articulos', label: 'Artículos', group: 'CONTENIDO' },
+    { to: '/admin/categorias-blog', label: 'Categorías de blog', group: 'CONTENIDO' },
+    { to: '/admin/comentarios', label: 'Comentarios', group: 'CONTENIDO' },
 ];
 
 export const sellerLinks: LinkItem[] = [

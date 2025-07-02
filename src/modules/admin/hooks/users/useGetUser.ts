@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import type { User } from '../../types/users.types';
 import { adminUsersApi } from '../../api/users.api';
+import type { Role } from '@/modules/core/types/role.type';
 
 export function useGetUser(id?: number) {
     const [user, setUser] = useState<User | null>(null);
@@ -14,8 +15,9 @@ export function useGetUser(id?: number) {
         .then((res) => {
             const mappedUser = {
                 ...res,
-                roles: res.roles.map((role: any) => ({
-                    ...role,
+                roles: res.roles.map((role: Partial<Role>) => ({
+                    id: role.id ?? 0,
+                    nombre: role.nombre ?? '',
                     permisos: role.permisos ?? []
                 }))
             };

@@ -5,7 +5,7 @@ import clsx from 'clsx';
 type Variant = 'primary' | 'secondary' | 'danger' | 'neutral';
 
 interface ActionButtonProps {
-    children: ReactNode;
+    children?: ReactNode;
     onClick?: MouseEventHandler<HTMLButtonElement>;
     iconLeft?: ReactNode;
     iconRight?: ReactNode;
@@ -17,10 +17,10 @@ interface ActionButtonProps {
 }
 
 const variantStyles: Record<Variant, string> = {
-    primary: 'bg-highlight text-black hover:bg-highlight/90',
+    primary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
     secondary: 'bg-muted text-foreground hover:bg-muted/70',
     danger: 'bg-destructive text-destructive-foreground hover:bg-destructive/80',
-    neutral: 'bg-button text-white hover:bg-button/90',
+    neutral: 'bg-primary text-primary-foreground hover:bg-primary/90',
 };
 
 export function ActionButton({
@@ -52,7 +52,7 @@ export function ActionButton({
         ) : (
             <>
             {iconLeft && <span className="flex-shrink-0">{iconLeft}</span>}
-            <span>{children}</span>
+            {children && <span>{children}</span>}
             {iconRight && <span className="flex-shrink-0">{iconRight}</span>}
             </>
         )}

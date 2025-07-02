@@ -8,3 +8,10 @@ export interface Tag {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface CreateTagInput {
+    nombre: string;
+    slug: string;
+}
+
+export type UpdateTagInput = Partial<CreateTagInput>;

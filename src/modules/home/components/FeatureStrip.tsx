@@ -13,7 +13,7 @@ const FEATURES: Item[] = [
 ];
 
 export const FeatureStrip = (): ReactElement => (
-  <section className="mt-10 w-full bg-[#7BAF8C] py-8 md:py-10">
+  <section className="mt-10 w-full bg-primary py-8 text-primary-foreground md:py-10">
     <div
       className="
         mx-auto grid max-w-screen-xl
@@ -28,9 +28,9 @@ export const FeatureStrip = (): ReactElement => (
         >
           <Icon
             size={96}
-            className="shrink-0 scale-75 text-black sm:scale-90 md:scale-100"
+            className="shrink-0 scale-75 sm:scale-90 md:scale-100"
           />
-          <p className="text-center font-cap-hero text-base leading-tight text-white sm:text-left sm:text-lg md:text-xl">
+          <p className="text-center font-cap-hero text-base leading-tight sm:text-left sm:text-lg md:text-xl">
             {lines.map((line) => (
               <span key={line} className="block">
                 {line}

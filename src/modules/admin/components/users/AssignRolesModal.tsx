@@ -19,7 +19,7 @@ import { Controller }        from 'react-hook-form';
 import { X }                 from 'lucide-react';
 
 import { useAssignRolesForm } from '../../hooks/users/useAssignRolesForm';
-import type { AssignRolesModalProps } from '../../types/assign-roles-modal.types';
+import type { AssignRolesModalProps } from '../../types/users-components.type';
 
 export default function AssignRolesModal({
     user,
@@ -42,7 +42,7 @@ export default function AssignRolesModal({
             <DialogTitle className="font-cap-heading-2">
             Asignar roles — {user.nombreUsuario}
             </DialogTitle>
-            <IconButton onClick={onClose} className="text-foreground">
+            <IconButton onClick={onClose} className="text-foreground" aria-label="Cerrar modal">
             <X size={18} />
             </IconButton>
         </div>

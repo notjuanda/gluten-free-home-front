@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { User } from '../../types/users.types';
 import type { CreateUserInput } from '../../types/users.types';
 import { adminUsersApi } from '../../api/users.api';
+import type { Role } from '@/modules/core/types/role.type';
 
 export function useCreateUser() {
     const [loading, setLoading] = useState(false);
@@ -15,16 +16,17 @@ export function useCreateUser() {
         const mappedUser = {
         ...user,
         roles: Array.isArray(user.roles)
-            ? user.roles.map((role: any) => ({
-                ...role,
+            ? user.roles.map((role: Partial<Role>) => ({
+                id: role.id ?? 0,
+                nombre: role.nombre ?? '',
                 permisos: role.permisos ?? [],
             }))
             : [],
         };
         console.log('Usuario creado:', mappedUser);
         return mappedUser;
-        } catch (err: any) {
-        setError(err.message);
+        } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'Error desconocido');
         return null;
         } finally {
         setLoading(false);

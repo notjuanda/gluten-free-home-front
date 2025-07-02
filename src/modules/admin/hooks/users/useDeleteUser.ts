@@ -11,8 +11,8 @@ export function useDeleteUser() {
         await adminUsersApi.remove(id);
         setError(null);
         return true;
-        } catch (err: any) {
-        setError(err.message);
+        } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'Error desconocido');
         return false;
         } finally {
         setLoading(false);

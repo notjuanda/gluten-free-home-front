@@ -25,19 +25,23 @@ export default function UsersPage() {
     };
 
     return (
-        <div className="mx-auto max-w-6xl px-4 py-6 space-y-6">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="w-full px-0 py-6 space-y-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between px-4">
                 <h1 className="text-2xl font-cap-heading-2 text-foreground">
                     Lista de Usuarios
                 </h1>
                 <AddUserModal onCreated={handleUserCreated} />
             </div>
-            <UsersList
-                users={localUsers}
-                loading={loading}
-                error={error}
-                onUserUpdated={handleUserUpdated}
-            />
+            <div className="-mx-4 md:mx-0 overflow-x-auto">
+                <div className="min-w-[640px] px-4">
+                    <UsersList
+                        users={localUsers}
+                        loading={loading}
+                        error={error}
+                        onUserUpdated={handleUserUpdated}
+                    />
+                </div>
+            </div>
         </div>
     );
 }

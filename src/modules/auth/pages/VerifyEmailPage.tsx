@@ -37,7 +37,7 @@ export default function VerifyEmailPage() {
         <div className="flex min-h-screen items-center justify-center bg-background px-4">
         {status === 'pending' ? (
             <div className="flex flex-col items-center gap-4">
-            <Loader2 size={48} className="animate-spin text-highlight" />
+            <Loader2 size={48} className="animate-spin text-secondary" />
             <p className="text-foreground">Verificando tu correo…</p>
             </div>
         ) : (

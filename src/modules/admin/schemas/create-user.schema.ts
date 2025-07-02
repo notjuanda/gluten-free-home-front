@@ -22,6 +22,7 @@ export const createUserSchema = z.object({
 
     telefono: z
         .string()
+        // eslint-disable-next-line no-useless-escape
         .regex(/^\+?[0-9\s\-]{6,20}$/, 'Teléfono no válido')
         .optional()
         .or(z.literal('')),

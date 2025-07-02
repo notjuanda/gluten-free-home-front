@@ -3,7 +3,6 @@ import { FiUserPlus } from 'react-icons/fi';
 import { useCreateUser } from '@/modules/admin/hooks/users/useCreateUser';
 import { FormModal } from '@/shared/ui/FormModal';
 import type { FormField } from '@/shared/types/form-modal.types';
-import type { User } from '@/modules/admin/types/users.types';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,10 +10,7 @@ import {
     createUserSchema,
     type CreateUserSchema,
 } from '../../schemas/create-user.schema';
-
-interface AddUserModalProps {
-    onCreated?: (user: User) => void;
-}
+import type { AddUserModalProps } from '../../types/users-components.type';
 
 export default function AddUserModal({ onCreated }: AddUserModalProps) {
     const [open, setOpen] = useState(false);

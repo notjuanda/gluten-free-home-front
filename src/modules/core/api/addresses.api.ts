@@ -36,3 +36,8 @@ export const getUserAddresses = async (
     usuarioId: number,
 ): Promise<Address[]> =>
     (await api.get<Address[]>(`/addresses/usuario/${usuarioId}`)).data;
+
+export const getMyAddresses = async (): Promise<Address[]> => {
+    const { data } = await api.get<Address[]>('/addresses/me');
+    return data;
+};

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Plus }                from 'lucide-react';
+import { Plus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-import RolesList          from '../../components/roles/RolesList';
-import { ActionButton }   from '@/shared/ui/ActionButton';
-import { useGetRoles }    from '../../hooks/roles/useGetRoles';
-import type { Role }      from '@/modules/core/types/role.type';
+import RolesList from '../../components/roles/RolesList';
+import { ActionButton } from '@/shared/ui/ActionButton';
+import { useGetRoles } from '../../hooks/roles/useGetRoles';
+import type { Role } from '@/modules/core/types/role.type';
 
 export default function RolesPage() {
+    const navigate = useNavigate();
     const { roles, loading, error } = useGetRoles();
     const [localRoles, setLocalRoles] = useState<Role[]>([]);
 
@@ -15,27 +17,34 @@ export default function RolesPage() {
     }, [roles]);
 
     const handleCreateRole = () => {
-        console.log('Abrir modal crear rol');
+        navigate('/admin/roles/crear');
+    };
+
+    const handleRoleDeleted = (id: number) => {
+        setLocalRoles(prevRoles => prevRoles.filter(role => role.id !== id));
     };
 
     return (
         <div className="mx-auto max-w-7xl space-y-6 px-4 py-8">
-        <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <h1 className="text-2xl font-cap-heading-2 text-foreground">
-            Roles y Permisos
-            </h1>
-
-            <ActionButton
-            onClick={handleCreateRole}
-            iconLeft={<Plus size={18} />}
-            variant="primary"
-            className="p-2"
-            >
-            <span className="sr-only">Crear rol</span>
-            </ActionButton>
-        </header>
-
-        <RolesList roles={localRoles} loading={loading} error={error} />
+            <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <h1 className="text-2xl font-cap-heading-2 text-foreground">
+                    Roles y Permisos
+                </h1>
+                <ActionButton
+                    onClick={handleCreateRole}
+                    iconLeft={<Plus size={18} />}
+                    variant="primary"
+                    className="p-2"
+                >
+                    <span className="sr-only">Crear rol</span>
+                </ActionButton>
+            </header>
+            <RolesList
+                roles={localRoles}
+                loading={loading}
+                error={error}
+                onRoleDeleted={handleRoleDeleted}
+            />
         </div>
     );
 }

@@ -1,5 +1,3 @@
-import type { Permission } from '@/modules/core/types/permission.type';
-
 const colorRing = [
     'bg-chart-1/15 text-chart-1 border-chart-1/20',
     'bg-chart-2/15 text-chart-2 border-chart-2/20',
@@ -7,12 +5,9 @@ const colorRing = [
     'bg-chart-4/15 text-chart-4 border-chart-4/20',
     'bg-chart-5/15 text-chart-5 border-chart-5/20'
 ];
+import type { PermissionBadgeProps } from '@/modules/admin/types/roles-components.type';
 
-interface Props {
-    permissions: Permission[];
-}
-
-export default function PermissionBadges({ permissions }: Props) {
+export default function PermissionBadges({ permissions }: PermissionBadgeProps) {
     if (!permissions.length)
         return (
             <p className="text-sm text-muted-foreground">

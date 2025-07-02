@@ -10,6 +10,7 @@ import {
 import { useUpdateUser }  from '@/modules/admin/hooks/users/useUpdateUser';
 import { useGetRoles }    from '@/modules/admin/hooks/roles/useGetRoles';
 import type { User }      from '@/modules/admin/types/users.types';
+import { adminUsersApi } from '@/modules/admin/api/users.api';
 
 export function useAssignRolesForm(
     user: User,
@@ -34,14 +35,21 @@ export function useAssignRolesForm(
         if (user && !rolesLoading && roles?.length) {
         reset({ rolesIds: user.roles.map((r) => r.id) });
         }
-    }, [user, rolesLoading, roles, reset]);
+    }, [user, rolesLoading, roles, reset, onClose]);
 
     const onSubmit = handleSubmit(async (values) => {
         const updated = await updateUser(user.id, { rolesIds: values.rolesIds });
         if (updated) {
-        onUpdated?.(updated);
-        onClose?.();
-        }
+         // Forzar recarga del usuario para obtener el updatedAt correcto
+            try {
+            const freshUser = await adminUsersApi.getById(user.id);
+            onUpdated?.(freshUser);
+            } catch {
+            // Si falla, al menos actualiza con el usuario anterior
+            onUpdated?.(updated);
+            }
+            onClose?.();
+            }
     });
 
     const busy = updating || rolesLoading;

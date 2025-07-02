@@ -32,42 +32,46 @@ export function LoginForm() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
         {serverErr && (
-            <p className="rounded-md bg-destructive/10 px-4 py-2 text-sm text-destructive text-white">
+            <p className="rounded-md bg-destructive/10 px-4 py-2 text-sm text-destructive">
             {serverErr.message}
             </p>
         )}
 
-        <div>
-            <label className="mb-1 block text-sm text-foreground text-white">
-            Correo Electrónico
+        <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium" htmlFor="email">
+                Correo electrónico
             </label>
             <input
-            type="email"
-            {...register('correo')}
-            className={clsx(
-            'w-full rounded-md bg-white px-4 py-2 text-black outline-none transition-shadow',
-            errors.correo && 'ring-2 ring-destructive'
-            )}
+                id="email"
+                type="email"
+                {...register('correo')}
+                className={clsx(
+                'w-full rounded-md bg-input px-4 py-2 text-foreground outline-none transition-shadow',
+                errors.correo && 'ring-2 ring-destructive'
+                )}
             />
             {errors.correo && (
-            <p className="mt-1 text-xs text-destructive-foreground text-white">
+            <p className="mt-1 text-xs text-destructive">
             {errors.correo.message}
             </p>
             )}
         </div>
 
-        <div>
-            <label className="mb-1 block text-sm text-foreground text-white">Contraseña</label>
+        <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium" htmlFor="password">
+                Contraseña
+            </label>
             <input
-            type="password"
-            {...register('contraseña')}
-            className={clsx(
-            'w-full rounded-md bg-white px-4 py-2 text-black outline-none transition-shadow',
-            errors.contraseña && 'ring-2 ring-destructive'
-            )}
+                id="password"
+                type="password"
+                {...register('contraseña')}
+                className={clsx(
+                'w-full rounded-md bg-input px-4 py-2 text-foreground outline-none transition-shadow',
+                errors.contraseña && 'ring-2 ring-destructive'
+                )}
             />
             {errors.contraseña && (
-            <p className="mt-1 text-xs text-destructive-foreground text-white">
+            <p className="mt-1 text-xs text-destructive">
             {errors.contraseña.message}
             </p>
             )}
@@ -75,7 +79,7 @@ export function LoginForm() {
 
         <Link
             to="/olvido-contraseña"
-            className="self-end text-xs underline text-foreground text-white transition-opacity hover:opacity-80"
+            className="self-end text-xs underline text-foreground transition-opacity hover:opacity-80"
         >
             ¿Olvidaste tu contraseña?
         </Link>
@@ -83,8 +87,8 @@ export function LoginForm() {
         <button
             type="submit"
             disabled={submitting || isPending}
-            className="rounded-full bg-button px-6 py-2 font-cap-medium uppercase tracking-wide
-                text-white transition-opacity hover:bg-button/90
+            className="rounded-full bg-secondary px-6 py-2 font-cap-medium uppercase tracking-wide
+                text-secondary-foreground transition-opacity hover:bg-secondary/90
                 disabled:cursor-not-allowed disabled:opacity-60"
         >
             {submitting ? 'Cargando…' : 'Continuar'}
