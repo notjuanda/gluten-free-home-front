@@ -26,6 +26,8 @@ import CreateArticlePage from "@/modules/admin/pages/articles/CreateArticlePage.
 import EditArticlePage from "@/modules/admin/pages/articles/EditArticlePage.tsx";
 import ArticlePreviewPage from "@/modules/admin/pages/articles/ArticlePreviewPage.tsx";
 import CategoriasBlogPage from "@/modules/admin/pages/categorias-blog/CategoriasBlogPage.tsx";
+import AdminCommentsPage from '@/modules/admin/pages/comments/AdminCommentsPage';
+import { BlogListPage, BlogDetailPage } from '@/modules/clients';
 
 const router = createBrowserRouter([ 
     {
@@ -116,6 +118,10 @@ const router = createBrowserRouter([
                 element: <CategoriasBlogPage />,
             },
             {
+                path: "admin/comentarios",
+                element: <AdminCommentsPage />,
+            },
+            {
                 path: "explorar",
                 element: <ClientCatalogPage />,
             },
@@ -138,6 +144,14 @@ const router = createBrowserRouter([
             {
                 path: '/producto/:id',
                 element: <ProductDetailPage />,
+            },
+            {
+                path: '/blog',
+                element: <BlogListPage />,
+            },
+            {
+                path: '/blog/:id',
+                element: <BlogDetailPage />,
             },
         ],
     },
