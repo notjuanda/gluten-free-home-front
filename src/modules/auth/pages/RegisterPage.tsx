@@ -1,9 +1,19 @@
 import { RegisterForm } from '../components/RegisterForm';
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 const RegisterPage = () => {
     return (
+        <>
+        <Helmet>
+            <title>Crear cuenta | Gluten Free Home</title>
+            <meta name="description" content="Regístrate en Gluten Free Home y accede a los mejores productos sin gluten, ofertas y más." />
+            <meta property="og:title" content="Crear cuenta | Gluten Free Home" />
+            <meta property="og:description" content="Regístrate en Gluten Free Home y accede a los mejores productos sin gluten, ofertas y más." />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content={window.location.href} />
+        </Helmet>
         <div className="flex min-h-screen bg-background">
         <div className="hidden basis-[50%] items-center justify-center bg-primary md:flex">
             <img
@@ -40,6 +50,7 @@ const RegisterPage = () => {
             </p>
         </div>
         </div>
+        </>
     );
 };
 

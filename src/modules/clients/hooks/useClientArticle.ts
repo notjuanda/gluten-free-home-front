@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
-import { getArticle } from '@/modules/core/api/articles.api';
+import { getArticleBySlug } from '@/modules/core/api/articles.api';
 import type { Article } from '@/modules/core/types/article.type';
 
-export function useClientArticle(id: number) {
+export function useClientArticle(slug: string) {
     const [article, setArticle] = useState<Article | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        if (!id) return;
+        if (!slug) return;
         setLoading(true);
-        getArticle(id)
+        getArticleBySlug(slug)
         .then(setArticle)
         .catch(() => setError('Error al cargar el artículo'))
         .finally(() => setLoading(false));
-    }, [id]);
+    }, [slug]);
 
     return { article, loading, error };
 } 

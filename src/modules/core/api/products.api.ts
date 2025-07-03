@@ -56,3 +56,6 @@ export const deleteProductImage = async (productId: number, imageId: number): Pr
 
 export const getTopProducts = async (limit = 10): Promise<TopProduct[]> =>
     (await api.get<TopProduct[]>(`/products/top${limit ? `?limit=${limit}` : ''}`)).data;
+
+export const getProductBySlug = async (slug: string): Promise<Product> =>
+    (await api.get<Product>(`/products/slug/${slug}`)).data;

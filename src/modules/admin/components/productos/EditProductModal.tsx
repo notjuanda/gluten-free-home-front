@@ -23,7 +23,7 @@ export default function EditProductModal({ open, onClose, productId, onUpdated }
 
     useEffect(() => {
         if (open && productId) {
-        refetch(productId);
+            refetch(productId);
         }
     }, [open, productId, refetch]);
 

@@ -72,3 +72,6 @@ export const uploadBlockImage = async (file: File): Promise<{ url: string }> => 
         headers: { 'Content-Type': 'multipart/form-data' },
     })).data;
 };
+
+export const getArticleBySlug = async (slug: string): Promise<Article> =>
+    (await api.get<Article>(`/articles/slug/${slug}`)).data;

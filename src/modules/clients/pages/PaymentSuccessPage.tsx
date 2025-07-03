@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { CheckCircle, Package, Home, ShoppingBag } from 'lucide-react';
+import { CheckCircle, Home, ShoppingBag } from 'lucide-react';
 
 const PaymentSuccessPage = () => {
     const [searchParams] = useSearchParams();
@@ -9,9 +9,6 @@ const PaymentSuccessPage = () => {
     useEffect(() => {
         const sessionId = searchParams.get('session_id');
         if (sessionId) {
-            // Aquí podrías hacer una llamada al backend para obtener los detalles del pedido
-            // basado en el session_id
-            console.log('Session ID:', sessionId);
         }
     }, [searchParams]);
 
@@ -29,16 +26,6 @@ const PaymentSuccessPage = () => {
                 <p className="text-gray-600 mb-6">
                     Tu pago ha sido procesado correctamente. Recibirás un email de confirmación con los detalles de tu compra.
                 </p>
-                
-                <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                    <div className="flex items-center justify-center mb-2">
-                        <Package className="h-5 w-5 text-blue-500 mr-2" />
-                        <span className="font-medium">Número de Sesión</span>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                        {searchParams.get('session_id') || 'N/A'}
-                    </p>
-                </div>
                 
                 <div className="space-y-3">
                     <Link

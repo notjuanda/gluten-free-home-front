@@ -10,7 +10,7 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => 
     const navigate = useNavigate();
 
     const handleCardClick = () => {
-        navigate(`/producto/${product.id}`);
+        navigate(`/producto/${product.slug}`);
     };
 
     const handlePrevious = (e: React.MouseEvent) => {

@@ -11,7 +11,7 @@ const BlogArticleCard: React.FC<Props> = ({ article }) => {
     return (
         <div className="bg-white rounded-xl shadow hover:shadow-lg transition-all border border-gray-100 overflow-hidden flex flex-col">
         {article.urlPortada && (
-            <Link to={`/blog/${article.id}`}>
+            <Link to={`/blog/${article.slug}`}>
             <img
                 src={`${API_URL}${article.urlPortada}`}
                 alt={article.textoAltPortada || article.titulo}
@@ -20,7 +20,7 @@ const BlogArticleCard: React.FC<Props> = ({ article }) => {
             </Link>
         )}
         <div className="p-5 flex-1 flex flex-col">
-            <Link to={`/blog/${article.id}`} className="hover:text-primary">
+            <Link to={`/blog/${article.slug}`} className="hover:text-primary">
             <h2 className="text-xl font-bold mb-2 line-clamp-2">{article.titulo}</h2>
             </Link>
             {article.resumen && (

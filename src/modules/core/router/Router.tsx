@@ -1,10 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import PageLayout from "../layouts/PageLayout.tsx";
-import Home from "@/modules/home/pages/Home.tsx";
-import LoginPage from "@/modules/auth/pages/LoginPage.tsx";
 import UsersPage from "@/modules/admin/pages/users/UserPage.tsx";
-import RegisterPage from "@/modules/auth/pages/RegisterPage.tsx";
-import VerifyEmailPage from "@/modules/auth/pages/VerifyEmailPage.tsx";
 import RolesPage from "@/modules/admin/pages/roles/RolesPage.tsx";
 import CreateRolePage from "@/modules/admin/pages/roles/CreateRolePage.tsx";
 import EditRolePage from "@/modules/admin/pages/roles/EditRolePage.tsx";
@@ -15,19 +11,27 @@ import CategoriesPage from "@/modules/admin/pages/categories/CategoriesPage.tsx"
 import IngredientsPage from "@/modules/admin/pages/ingredients/IngredientsPage.tsx";
 import OrdersPage from "@/modules/admin/pages/orders/OrdersPage.tsx";
 import PaymentsPage from "@/modules/admin/pages/payments/PaymentsPage.tsx";
-import ClientCatalogPage from "@/modules/clients/pages/ClientCatalogPage.tsx";
-import CartPage from "@/modules/clients/pages/CartPage.tsx";
-import PaymentSuccessPage from "@/modules/clients/pages/PaymentSuccessPage.tsx";
-import PaymentCancelPage from "@/modules/clients/pages/PaymentCancelPage.tsx";
-import MyOrdersPage from '@/modules/clients/pages/MyOrdersPage.tsx';
-import ProductDetailPage from '@/modules/clients/pages/ProductDetailPage';
 import ArticlesPage from "@/modules/admin/pages/articles/ArticlesPage.tsx";
 import CreateArticlePage from "@/modules/admin/pages/articles/CreateArticlePage.tsx";
 import EditArticlePage from "@/modules/admin/pages/articles/EditArticlePage.tsx";
 import ArticlePreviewPage from "@/modules/admin/pages/articles/ArticlePreviewPage.tsx";
 import CategoriasBlogPage from "@/modules/admin/pages/categorias-blog/CategoriasBlogPage.tsx";
 import AdminCommentsPage from '@/modules/admin/pages/comments/AdminCommentsPage';
-import { BlogListPage, BlogDetailPage } from '@/modules/clients';
+import React, { Suspense } from 'react';
+
+// Declaraciones de React.lazy para páginas de clientes y home
+const Home = React.lazy(() => import('@/modules/home/pages/Home'));
+const LoginPage = React.lazy(() => import('@/modules/auth/pages/LoginPage'));
+const RegisterPage = React.lazy(() => import('@/modules/auth/pages/RegisterPage'));
+const VerifyEmailPage = React.lazy(() => import('@/modules/auth/pages/VerifyEmailPage'));
+const ClientCatalogPage = React.lazy(() => import('@/modules/clients/pages/ClientCatalogPage'));
+const CartPage = React.lazy(() => import('@/modules/clients/pages/CartPage'));
+const PaymentSuccessPage = React.lazy(() => import('@/modules/clients/pages/PaymentSuccessPage'));
+const PaymentCancelPage = React.lazy(() => import('@/modules/clients/pages/PaymentCancelPage'));
+const MyOrdersPage = React.lazy(() => import('@/modules/clients/pages/MyOrdersPage'));
+const ProductDetailPage = React.lazy(() => import('@/modules/clients/pages/ProductDetailPage'));
+const BlogListPage = React.lazy(() => import('@/modules/clients/pages/BlogListPage'));
+const BlogDetailPage = React.lazy(() => import('@/modules/clients/pages/BlogDetailPage'));
 
 const router = createBrowserRouter([ 
     {
@@ -35,19 +39,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Home />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><Home /></Suspense>,
             },
             {
                 path: "/login",     
-                element: <LoginPage />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><LoginPage /></Suspense>,
             },
             {
                 path: "/register",
-                element: <RegisterPage />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><RegisterPage /></Suspense>,
             },
             {
                 path: "/verify-email",
-                element: <VerifyEmailPage />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><VerifyEmailPage /></Suspense>,
             },
             {   
                 path: "/admin/dashboard",
@@ -123,35 +127,35 @@ const router = createBrowserRouter([
             },
             {
                 path: "explorar",
-                element: <ClientCatalogPage />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><ClientCatalogPage /></Suspense>,
             },
             {
                 path: '/carrito',
-                element: <CartPage />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><CartPage /></Suspense>,
             },
             {
                 path: '/payment/success',
-                element: <PaymentSuccessPage />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><PaymentSuccessPage /></Suspense>,
             },
             {
                 path: '/payment/cancel',
-                element: <PaymentCancelPage />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><PaymentCancelPage /></Suspense>,
             },
             {
                 path: '/mis-pedidos',
-                element: <MyOrdersPage />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><MyOrdersPage /></Suspense>,
             },
             {
-                path: '/producto/:id',
-                element: <ProductDetailPage />,
+                path: '/producto/:slug',
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><ProductDetailPage /></Suspense>,
             },
             {
                 path: '/blog',
-                element: <BlogListPage />,
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><BlogListPage /></Suspense>,
             },
             {
-                path: '/blog/:id',
-                element: <BlogDetailPage />,
+                path: '/blog/:slug',
+                element: <Suspense fallback={<div className='py-16 text-center'>Cargando...</div>}><BlogDetailPage /></Suspense>,
             },
         ],
     },

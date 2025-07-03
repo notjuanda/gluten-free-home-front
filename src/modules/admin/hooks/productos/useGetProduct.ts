@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { getProduct } from '@/modules/core/api/products.api';
+import { getProductBySlug, getProduct } from '@/modules/core/api/products.api';
 import type { Product } from '@/modules/core/types/product.type';
 
 export function useGetProduct() {
@@ -7,16 +7,21 @@ export function useGetProduct() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchProduct = useCallback(async (id: number) => {
+    const fetchProduct = useCallback(async (idOrSlug: number | string) => {
         setLoading(true);
         setError(null);
         try {
-        const data = await getProduct(id);
-        setProduct(data);
+            let data: Product;
+            if (typeof idOrSlug === 'number') {
+                data = await getProduct(idOrSlug);
+            } else {
+                data = await getProductBySlug(idOrSlug);
+            }
+            setProduct(data);
         } catch (e: unknown) {
-        setError(e instanceof Error ? e.message : 'Error al obtener el producto');
+            setError(e instanceof Error ? e.message : 'Error al obtener el producto');
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     }, []);
 

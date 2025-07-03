@@ -2,6 +2,7 @@ import ProductsFilterSidebar from '../components/ProductsFilterSidebar';
 import ProductsList from '../components/ProductsList';
 import { useProducts } from '../hooks/useProducts';
 import TopProductCard from '../components/TopProductCard';
+import { Helmet } from 'react-helmet-async';
 
 import { useCart } from '@/modules/clients/context/CartContext';
 import { useAuth } from '@/modules/core/hooks/useAuth';
@@ -48,6 +49,15 @@ const ClientCatalogPage = () => {
   } = useProducts();
 
   return (
+    <>
+    <Helmet>
+      <title>Catálogo de Productos Sin Gluten | Gluten Free Home</title>
+      <meta name="description" content="Explora nuestro catálogo de productos certificados sin gluten. Compra seguro, fácil y rápido en Gluten Free Home." />
+      <meta property="og:title" content="Catálogo de Productos Sin Gluten | Gluten Free Home" />
+      <meta property="og:description" content="Explora nuestro catálogo de productos certificados sin gluten. Compra seguro, fácil y rápido en Gluten Free Home." />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content={window.location.href} />
+    </Helmet>
     <div className="min-h-screen bg-background">
       {/* Botón de filtros para móviles y tablets */}
       <div className="xl:hidden p-3 sm:p-4 border-b border-border">
@@ -137,6 +147,7 @@ const ClientCatalogPage = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
