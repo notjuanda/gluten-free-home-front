@@ -95,7 +95,7 @@ export const HeroDelivery = (): ReactElement => {
             {CARDS.map(({ eyebrow, title, text }) => (
                 <article
                 key={title}
-                className="rounded-lg bg-header/90 p-6 backdrop-blur-sm"
+                className="rounded-lg bg-black/80 p-6 backdrop-blur-sm"
                 >
                 <p className="font-cap-medium text-xs uppercase tracking-wide text-white/90">
                     {eyebrow}
