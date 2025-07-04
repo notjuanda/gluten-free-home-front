@@ -32,7 +32,7 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => 
     const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/optimized/logo-gluten-free-home.webp';
 
     return (
-        <div className="bg-client text-client-foreground p-3 sm:p-4 flex flex-col items-center min-h-[280px] sm:min-h-[300px] lg:min-h-[320px] rounded-xl sm:rounded-2xl transition-all duration-200 hover:scale-[1.02] sm:hover:scale-[1.03] hover:shadow-lg cursor-pointer" onClick={handleCardClick}>
+        <div className="bg-client text-client-foreground p-3 sm:p-4 flex flex-col items-center min-h-[320px] max-h-[340px] rounded-xl sm:rounded-2xl transition-all duration-200 hover:scale-[1.02] sm:hover:scale-[1.03] hover:shadow-lg cursor-pointer" onClick={handleCardClick}>
         <div className="relative flex justify-center items-center mb-2 w-full">
             {isLoading ? (
                 <div className="w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 bg-primary animate-pulse rounded-lg"></div>
@@ -75,8 +75,8 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => 
                 </>
             )}
         </div>
-        <div className="w-full flex-grow flex flex-col text-left mb-2">
-            <p className="font-bold text-[10px] sm:text-xs lg:text-sm leading-tight min-h-[2.5em]">
+        <div className="w-full flex-grow flex flex-col text-left mb-2 min-h-[60px]">
+            <p className="font-bold text-[10px] sm:text-xs lg:text-sm leading-tight min-h-[2.5em] line-clamp-2 overflow-hidden">
                 {product.nombre}
             </p>
             <div className="mt-auto">

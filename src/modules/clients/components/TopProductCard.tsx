@@ -21,7 +21,7 @@ const TopProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart })
     const mainImageSrc = hasImages ? images[currentIndex]?.urlImagen : '/optimized/logo-gluten-free-home.webp';
 
     return (
-        <div className="w-full sm:w-32 md:w-36 lg:w-40 xl:w-44 sm:flex-shrink-0 group p-2 flex flex-col items-center">
+        <div className="w-full sm:w-32 md:w-36 lg:w-40 xl:w-44 sm:flex-shrink-0 group p-2 flex flex-col items-center min-h-[220px] max-h-[260px]">
             <div className='relative bg-primary flex items-center justify-center h-24 sm:h-28 md:h-32 w-full mb-2 rounded-lg overflow-hidden'>
                 <img
                     src={mainImageSrc}
@@ -46,7 +46,7 @@ const TopProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart })
                 )}
             </div>
             <div className="text-xs text-center mt-1 w-full text-client-foreground">
-                <p className='truncate font-bold text-xs sm:text-sm'>{product.nombre}</p>
+                <p className='line-clamp-2 font-bold text-xs sm:text-sm overflow-hidden'>{product.nombre}</p>
                 <span className="font-bold text-sm sm:text-base">Bs {product.precioBob}</span>
             </div>
             <button 
