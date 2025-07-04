@@ -70,7 +70,7 @@ const ClientCatalogPage = () => {
         </button>
       </div>
 
-      <div className="flex flex-col xl:flex-row">
+      <div className="flex flex-col xl:flex-row max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
         {/* Sidebar - Desktop (xl y superior) */}
         <aside className="hidden xl:block w-72 bg-client text-client-foreground p-6 flex-shrink-0 border-border rounded-2xl m-4">
           <ProductsFilterSidebar
@@ -110,11 +110,11 @@ const ClientCatalogPage = () => {
         <div className="flex-1 flex flex-col p-3 sm:p-4 lg:p-6 xl:p-8">
           {/* Sección de productos más vendidos */}
           <section className="bg-client text-client-foreground w-full px-3 sm:px-4 lg:px-6 xl:px-8 py-4 sm:py-6 mb-6 sm:mb-8 border-border rounded-xl sm:rounded-2xl">
-            <div className="flex flex-col xl:flex-row items-start xl:items-center gap-3 sm:gap-4 xl:gap-8">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-extrabold whitespace-pre-line xl:min-w-[220px]">
+            <div className="flex flex-col gap-3 sm:gap-4 xl:gap-8">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-extrabold whitespace-pre-line xl:min-w-[220px] mb-2">
                 Los más <br /> vendidos
               </h2>
-              <div className="grid grid-cols-2 gap-4 sm:flex sm:flex-row sm:gap-4 lg:gap-6 xl:gap-8 sm:flex-1 items-stretch sm:items-center sm:justify-start sm:overflow-x-auto sm:pb-2 xl:pb-0 sm:scrollbar-hide">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                 {topProducts.map(product => (
                   <TopProductCard key={product.id} product={product} onAddToCart={handleAddToCart} />
                 ))}
