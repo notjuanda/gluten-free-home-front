@@ -4,7 +4,7 @@ import type { ProductsListProps } from '../types/products-components.type';
 
 const ProductsList: React.FC<ProductsListProps> = ({ products, onAddToCart }) => {
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
+    <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
       {products.map((product: Product) => (
         <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
       ))}
