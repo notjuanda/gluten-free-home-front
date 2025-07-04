@@ -85,7 +85,7 @@ const ProductCard: React.FC<TopProductCardProps> = ({ product, onAddToCart}) => 
         </div>
         <button 
             className="bg-black text-white text-xs sm:text-sm px-0.5 sm:px-0.5 py-0.5 sm:py-0.5 mt-auto cursor-pointer font-mono tracking-tight rounded transition-all duration-200 hover:bg-primary hover:text-primary-foreground w-full"
-            onClick={e => { e.stopPropagation(); onAddToCart(product); }}
+            onClick={e => { e.stopPropagation(); onAddToCart({ ...product, imagenes: images }); }}
         >
             Agregar
         </button>
